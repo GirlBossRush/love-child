@@ -1,0 +1,11 @@
+# Garbage
+.DS_Store
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+.sass-cache/*/**
+/build

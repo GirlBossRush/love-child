@@ -1,0 +1,35 @@
+$types: default, primary, danger, info, warning, success
+$type-colors: $brand-primary, $brand-primary, $brand-danger, $brand-info, $brand-warning, $brand-success
+
+.btn
+  border: none
+  border-radius: 0
+  border-bottom: 1px solid $white
+  padding: 4px 16px
+
+  $i: 1
+  @each $type in $types
+    &.btn-#{$type}
+      color: $black
+      background: $body-bg
+      border-bottom-color: nth($type-colors, $i)
+
+      &:hover
+        color: nth($type-colors, $i)
+        border-bottom-color: nth($type-colors, $i)
+    $i: $i + 1
+
+  &.dark
+    $i: 1
+    @each $type in $types
+      &.btn-#{$type}
+        color: $white
+        background: $black
+
+        &:hover
+          color: nth($type-colors, $i)
+
+      $i: $i + 1
+
+
+

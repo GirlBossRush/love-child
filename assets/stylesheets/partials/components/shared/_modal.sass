@@ -1,0 +1,71 @@
+.modal
+  .modal-inner
+    background-color: $black
+    border-radius: 2px
+
+    .modal-content
+      background-color: $black
+
+      border-radius: 2px
+      border: 4px double $white
+
+      font-family: $font-family-accent
+      color: #fff
+
+      .modal-header
+        padding: 7px 10px
+
+        border: none
+        min-height: 0
+
+        .modal-title
+          font-variant: small-caps
+          font-weight: 200
+
+          text-align: center
+
+          border-bottom: 1px solid $white
+
+          &.info
+            border-bottom-color: $brand-info
+
+          &.error
+            border-bottom-color: $brand-danger
+
+          &.warning
+            border-bottom-color: $brand-warning
+
+        .close
+          font-size: 2em
+          font-weight: normal
+          text-shadow: 0 0 10px #fff
+          color: $white
+
+          opacity: 1
+
+          &:hover
+            text-shadow: 0 0 25px #fff
+
+      .modal-body
+        text-align: center
+
+      .modal-footer
+        border: none
+
+        text-align: center
+
+        margin: 0 auto
+        width: 80%
+
+        .actions
+          display: inline-block
+
+          padding: 0 10px
+
+          .btn
+            & + .btn
+              margin-left: 70px
+
+@media (min-width: 768px)
+  .modal-sm
+    width: 350px

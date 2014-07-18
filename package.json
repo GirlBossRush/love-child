@@ -1,0 +1,31 @@
+{
+  "name": "love-child",
+  "devDependencies": {
+    "browserify": "~4.2.1",
+    "coffeeify": "~0.6.0",
+    "gulp": "~3.8.6",
+    "coffee-script": "~1.7.1",
+    "gulp-ruby-sass": "~0.6.0",
+    "watchify": "~0.10.2",
+    "vinyl-source-stream": "~0.1.1",
+    "gulp-util": "~2.2.20",
+    "browserify-shim": "~3.6.0",
+    "underscore": "~1.6.0",
+    "bootstrap-sass": "~3.2.0",
+    "ampersand-rest-collection": "~1.1.1",
+    "ampersand-model": "~3.0.3",
+    "ampersand-router": "~1.0.1",
+    "ampersand-sync": "~1.0.1",
+    "moment": "~2.7.0"
+  },
+  "private": true,
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "dependencies": {},
+  "browserify": {
+    "transform": [
+      "coffeeify"
+    ]
+  }
+}

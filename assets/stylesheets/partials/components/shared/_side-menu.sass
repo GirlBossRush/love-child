@@ -1,0 +1,54 @@
+$expanded-width: 150px
+$collapsed-width: 45px
+$width-delta: $expanded-width - $collapsed-width
+
+#aside-content
+  display: block
+
+  position: fixed
+  top: 25%
+  left: -$width-delta
+  z-index: $priority-high
+
+  width: $expanded-width
+  height: 100%
+
+  color: $white
+
+  .menu-content
+    .list-group
+      text-align: right
+
+      .list-group-item
+        transition: -moz-transform $speed-fast ease-out
+        transition: -webkit-transform $speed-fast ease-out
+        transition: -ms-transform $speed-fast ease-out
+        transition: transform $speed-fast ease-out
+
+        background: $black
+
+        cursor: pointer
+        color: $gray-light
+
+        border-left: none
+        border-right: none
+
+        &:first-child
+          border-radius: 2px
+          border-top: none
+
+        &:last-child
+          border-radius: 0
+          border-bottom: 2px
+
+        &:hover
+          color: $white
+          +transform(translate($width-delta, 0))
+
+      .accent
+        margin-left: 15px
+
+
+html.csstransforms3d #aside-content
+  .menu-content .list-group-item:hover
+    +transform(translate3d($width-delta, 0, 0))

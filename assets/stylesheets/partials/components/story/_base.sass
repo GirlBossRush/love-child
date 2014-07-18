@@ -1,0 +1,46 @@
+.story
+  width: 60%
+  max-width: 940px
+
+  margin: 16px auto
+
+  line-height: 30px
+  font-size: 18px
+
+  .headline
+    text-align: center
+
+    .title
+      font-family: $font-family-serif
+      font-weight: bold
+      font-size: 2em
+
+    .description
+      font-style: italic
+      color: #333
+
+      margin: 18px 0
+
+    .section-seperator
+      width: 85%
+      border: none
+      border-bottom: 1px solid #555
+      position: relative
+      z-index: -1
+
+      &:after
+        z-index: -1
+        content: "\2767" // Binding Signature Leaf
+        font-size: 1.5em
+        background: $body-bg
+        position: absolute
+        top: -14px
+        left: 47%
+        width: 35px
+
+  .body
+    p
+      border: 1px solid $offwhite
+
+
+
