@@ -13,4 +13,4 @@ options =
 gulp.task "stylesheets", ->
   gulp.src "assets/stylesheets/application.sass"
     .pipe sass(options)
-    .pipe gulp.dest "build/css"
+    .pipe gulp.dest "build/assets"

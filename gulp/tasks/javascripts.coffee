@@ -33,9 +33,9 @@ gulp.task "javascripts", ->
       # Use vinyl-source-stream to make the
       # stream gulp compatible. Specifiy the
       # desired output filename here.
-      .pipe(source("app.js"))
+      .pipe(source("application.js"))
       # Specify the output destination
-      .pipe(gulp.dest("./build/js"))
+      .pipe(gulp.dest("./build/assets"))
       # Log when bundling completes!
       # .on "end", bundleLogger.end
 

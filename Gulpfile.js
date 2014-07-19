@@ -1,4 +1,5 @@
 require('coffee-script/register');
+var requireDir = require('require-dir');
 
-require("./gulp/tasks/stylesheets");
-require("./gulp/tasks/javascripts");
+requireDir('./gulp/tasks');
+
