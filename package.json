@@ -6,7 +6,7 @@
     "gulp": "~3.8.6",
     "coffee-script": "~1.7.1",
     "gulp-ruby-sass": "~0.6.0",
-    "watchify": "~0.10.2",
+    "watchify": "~0.8.1",
     "vinyl-source-stream": "~0.1.1",
     "gulp-util": "~2.2.0",
     "browserify-shim": "~3.6.0",
@@ -24,7 +24,9 @@
     "jquery": "~2.1.1",
     "gulp-livereload": "~2.1.0",
     "gulp-watch": "~0.6.8",
-    "gulp-connect": "~2.0.6"
+    "gulp-connect": "~2.0.6",
+    "gulp-notify": "~1.4.0",
+    "pretty-hrtime": "~0.2.1"
   },
   "private": true,
   "engines": {

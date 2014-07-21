@@ -1,8 +1,8 @@
 module.exports =
   apiPath: (path = "") ->
-    "//love-child.com:3001/#{path}"
+    "http://love-child.com:3001/#{path}"
 
   assetPath: (path = "") ->
-    "//love-child.com:3000/#{path}"
+    "http://love-child.com:3000/#{path}"
 
   DEFAULT_TITLE: "Love Child"

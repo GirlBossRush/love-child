@@ -12,8 +12,9 @@ assets =
   middleware: (connect) ->
     return [
       (req, res, next) ->
-        res.setHeader('Access-Control-Allow-Origin', '*')
-        res.setHeader('Access-Control-Allow-Methods', '*')
+        # res.setHeader("Access-Control-Allow-Origin", "http://love-child.com:3000")
+        res.setHeader("Access-Control-Allow-Origin", "*")
+        res.setHeader("Access-Control-Allow-Methods", "*")
         next()
     ]
 

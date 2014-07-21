@@ -4,10 +4,10 @@ server = tinylr()
 
 tasks =
   "assets/stylesheets/**/*.sass": ["stylesheets"]
-  "assets/javascripts/**/*.coffee": ["javascripts"]
   "assets/templates/**/*.jade": ["templates"]
+  # Javascripts watched with Watchify.
 
-gulp.task "watch", ->
+gulp.task "watch", ["setWatch", "build"], ->
   server.listen 35729, (err) ->
     return console.log(err) if err
 

@@ -2,7 +2,6 @@ AmpersandRestCollection = require("ampersand-rest-collection/ampersand-rest-coll
 Story                   = require("../models/story")
 apiPath                 = require("../constants").apiPath
 
-
 Stories = AmpersandRestCollection.extend
   url: apiPath("stories")
   model: Story
