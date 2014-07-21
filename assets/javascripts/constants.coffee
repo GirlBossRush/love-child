@@ -3,6 +3,6 @@ module.exports =
     "//love-child.com:3001/#{path}"
 
   assetPath: (path = "") ->
-    "//assets.love-child.com:3002/#{path}"
+    "//love-child.com:3000/#{path}"
 
   DEFAULT_TITLE: "Love Child"

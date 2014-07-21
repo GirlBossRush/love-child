@@ -1,11 +1,14 @@
 gulp    = require("gulp")
 gutil   = require("gulp-util")
 connect = require("gulp-connect")
-app     = require("express")()
 
 assets =
-  port: 3002
+  port: 3000
   root: ["build/assets"]
+
+  # Invalid routes are caught by the client side router.
+  fallback: "build/index.html"
+
   middleware: (connect) ->
     return [
       (req, res, next) ->
@@ -16,9 +19,3 @@ assets =
 
 gulp.task "serve", ->
   connect.server(assets)
-
-  app.listen 3000, ->
-    console.log "Running"
-
-  app.get "*", (req, res, next) ->
-    res.sendfile "build/index.html"
