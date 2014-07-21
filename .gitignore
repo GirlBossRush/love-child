@@ -7,5 +7,5 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-.sass-cache/*/**
-/build
+.sass-cache/**/*
+/build/**/*
