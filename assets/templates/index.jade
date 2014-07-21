@@ -1,0 +1,29 @@
+doctype html
+
+html.no-js(lang="en")
+  head
+    title= DEFAULT_TITLE
+
+    link(rel="stylesheet" type="text/css" href="#{assetPath('application.css')}")
+    link(rel="shortcut icon" href="#{assetPath('foundation/diamond.png')}")
+
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+
+    meta(name="description" content="")
+    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+
+
+  body(spellcheck=true)
+    noscript
+      | Please enable Javascript.
+      a href="http://enable-javascript.com" http://enable-javascript.com
+
+    #above-content
+    .mask
+
+    aside#aside-content
+
+    main#main-content.container
+
+    script(src="#{assetPath('application.js')}")

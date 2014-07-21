@@ -1,5 +1,5 @@
-gulp       = require "gulp"
-sass       = require "gulp-ruby-sass"
+gulp = require("gulp")
+sass = require("gulp-ruby-sass")
 
 options =
   style: "expanded"

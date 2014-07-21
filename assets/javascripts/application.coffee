@@ -1,5 +1,4 @@
 #= require modernizr/modernizr
-#= require jquery/dist/jquery
 #= require bootstrap
 
 DocumentHelper    = require("./lib/document-helper")
@@ -10,6 +9,9 @@ History           = require("ampersand-router/ampersand-history")
 
 SideMenu          = require("./components/shared/side-menu")
 navigationItems   = require("./components/shared/side-menu/navigation-items")
+
+# Necessary for some plugins.
+window.$ = require("jquery")
 
 $ ->
   new ApplicationRouter()

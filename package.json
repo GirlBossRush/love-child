@@ -8,7 +8,7 @@
     "gulp-ruby-sass": "~0.6.0",
     "watchify": "~0.10.2",
     "vinyl-source-stream": "~0.1.1",
-    "gulp-util": "~2.2.20",
+    "gulp-util": "~2.2.0",
     "browserify-shim": "~3.6.0",
     "underscore": "~1.6.0",
     "bootstrap-sass": "~3.2.0",
@@ -18,7 +18,13 @@
     "ampersand-sync": "~1.0.1",
     "moment": "~2.7.0",
     "gulp-jade": "~0.6.1",
-    "require-dir": "~0.1.0"
+    "require-dir": "~0.1.0",
+    "express": "~4.6.1",
+    "tiny-lr": "0.0.9",
+    "jquery": "~2.1.1",
+    "gulp-livereload": "~2.1.0",
+    "gulp-watch": "~0.6.8",
+    "gulp-connect": "~2.0.6"
   },
   "private": true,
   "engines": {

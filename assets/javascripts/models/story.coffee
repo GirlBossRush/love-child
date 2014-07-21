@@ -1,4 +1,5 @@
 AmpersandModel = require("../lib/ampersand-rails-model")
+apiPath        = require("../constants").apiPath
 
 Story = AmpersandModel.extend
   props:
@@ -9,7 +10,7 @@ Story = AmpersandModel.extend
     created_at: "string"
     updated_at: "string"
 
-  urlRoot: "/api/stories"
+  urlRoot: apiPath("stories")
 
   defaults:
     title: "Title"
