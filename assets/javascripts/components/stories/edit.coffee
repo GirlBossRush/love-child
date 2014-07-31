@@ -69,12 +69,14 @@ StoryEditor = React.createClass
         @state.isSaving = false
         @state.isSaved  = true
 
+        @forceUpdate()
+
       error: =>
         @state.isSaving = false
         @state.isSaved  = false
 
-      complete: =>
         @forceUpdate()
+
   , UPDATE_THROTTLE
 
   handleContentUpdate: (e) ->
