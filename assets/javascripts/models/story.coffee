@@ -2,6 +2,8 @@ AmpersandModel = require("../lib/ampersand-rails-model")
 apiPath        = require("../constants").apiPath
 
 Story = AmpersandModel.extend
+  name: "story"
+
   props:
     id: "integer"
     title: "string"

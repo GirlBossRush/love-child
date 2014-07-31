@@ -3,6 +3,13 @@ sync           = require("ampersand-sync")
 _              = require("underscore")
 
 module.exports = AmpersandModel.extend
+  toJSON: ->
+    attributes = {}
+
+    attributes[@name] = @serialize()
+
+    return attributes
+
   sync: (method, model, options) ->
     options.beforeSend = (xhr) ->
       xhr.setRequestHeader("Access-Control-Allow-Origin", "http://love-child:3001")
