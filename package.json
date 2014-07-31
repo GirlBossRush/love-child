@@ -1,7 +1,7 @@
 {
   "name": "love-child",
   "devDependencies": {
-    "browserify": "~4.2.1",
+    "browserify": "~5.9.1",
     "coffeeify": "~0.6.0",
     "gulp": "~3.8.6",
     "coffee-script": "~1.7.1",
@@ -9,7 +9,6 @@
     "watchify": "~0.8.1",
     "vinyl-source-stream": "~0.1.1",
     "gulp-util": "~2.2.0",
-    "browserify-shim": "~3.6.0",
     "gulp-jade": "~0.6.1",
     "require-dir": "~0.1.0",
     "express": "~4.6.1",
@@ -28,7 +27,8 @@
     "ampersand-model": "~3.0.3",
     "ampersand-router": "~1.0.1",
     "ampersand-sync": "~1.0.1",
-    "moment": "~2.7.0"
+    "moment": "~2.7.0",
+    "react": "~0.11.1"
   },
   "private": true,
   "engines": {

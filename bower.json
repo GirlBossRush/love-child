@@ -16,9 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "react": "~0.11.0",
-    "modernizr": "~2.8.2",
-    "jquery": "~2.1.1",
     "bourbon": "~4.0.2"
   }
 }

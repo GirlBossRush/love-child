@@ -7,6 +7,7 @@ options =
   loadPath: [
     "#{process.cwd()}/assets/stylesheets"
     "#{process.cwd()}/node_modules"
+    "#{process.cwd()}/vendor/assets/stylesheets"
     "#{process.cwd()}/vendor/assets/bower_components"
   ]
 
