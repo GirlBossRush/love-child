@@ -5,4 +5,4 @@ module.exports =
     "#{config.API_BASE}/#{path}"
 
   asset: (path = "") ->
-    "#{config.APP_BASE}/#{path}"
+    "#{config.APP_BASE}/assets/#{path}"

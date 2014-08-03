@@ -4,7 +4,7 @@ connect = require("gulp-connect")
 
 assets =
   port: 3000
-  root: ["build/assets"]
+  root: ["build"]
 
   # Invalid routes are caught by the client side router.
   fallback: "build/index.html"
