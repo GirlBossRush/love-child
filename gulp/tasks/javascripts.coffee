@@ -18,8 +18,7 @@ gulp.task "javascripts", ->
     bundleLogger.start()
 
     bundler
-      # Enable source maps.
-      .bundle(debug: true)
+      .bundle()
       # Report compile errors
       .on "error", handleErrors
       .on "end", bundleLogger.end
