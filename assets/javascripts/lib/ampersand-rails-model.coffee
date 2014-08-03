@@ -11,8 +11,8 @@ module.exports = AmpersandModel.extend
     return attributes
 
   sync: (method, model, options) ->
-    options.beforeSend = (xhr) ->
-      xhr.setRequestHeader("Access-Control-Allow-Origin", "http://love-child:3001")
-      xhr.setRequestHeader("Access-Control-Allow-Methods", "http://love-child:3001")
+    if _.contains(["update", "create", "delete"], method)
+      options.xhrFields =
+        withCredentials: true
 
     sync.call(this, method, model, options)
