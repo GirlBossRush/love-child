@@ -1,16 +1,17 @@
-argv = require("yargs").argv
+argv        = require("yargs").argv
+environment = argv.environment or "development"
 
 module.exports =
-  APP_BASE: do ->
-    if argv.environment is "production"
-      "//alternativefiction.org"
-    else
-      "//localhost:3000"
-
-  API_BASE: do ->
-    if argv.environment is "production"
-      "//api.alternativefiction.org"
-    else
-      "//localhost:3001"
-
   DEFAULT_TITLE: "Alternative Fiction"
+
+  ENVIRONMENT: environment
+
+  APP_BASE: if environment is "production"
+    "//alternativefiction.org"
+  else
+    "//localhost:3000"
+
+  API_BASE: if environment is "production"
+    "//api.alternativefiction.org"
+  else
+    "//localhost:3001"
