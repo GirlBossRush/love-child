@@ -28,7 +28,8 @@
     "ampersand-router": "~1.0.1",
     "ampersand-sync": "~1.0.1",
     "moment": "~2.7.0",
-    "react": "~0.11.1"
+    "react": "~0.11.1",
+    "medium-editor": "~1.8.14"
   },
   "private": true,
   "engines": {
