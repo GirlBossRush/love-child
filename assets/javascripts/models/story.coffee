@@ -1,5 +1,6 @@
 AmpersandModel = require("../lib/ampersand-rails-model")
-apiPath        = require("../constants").apiPath
+pathHelper     = require("../../../util/path-helper")
+
 
 Story = AmpersandModel.extend
   name: "story"
@@ -12,7 +13,7 @@ Story = AmpersandModel.extend
     created_at: "string"
     updated_at: "string"
 
-  urlRoot: apiPath("stories")
+  urlRoot: pathHelper.api("stories")
 
   defaults:
     title: "Title"

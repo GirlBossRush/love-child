@@ -2,10 +2,10 @@ doctype html
 
 html.no-js(lang="en")
   head
-    title= DEFAULT_TITLE
+    title= config.DEFAULT_TITLE
 
-    link(rel="stylesheet" type="text/css" href="#{assetPath('application.css')}")
-    link(rel="shortcut icon" href="#{assetPath('foundation/diamond.png')}")
+    link(rel="stylesheet" type="text/css" href="#{pathHelper.asset('application.css')}")
+    link(rel="shortcut icon" href="#{pathHelper.asset('foundation/diamond.png')}")
 
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
@@ -26,4 +26,4 @@ html.no-js(lang="en")
 
     main#main-content.container
 
-    script(src="#{assetPath('application.js')}")
+    script(src="#{pathHelper.asset('application.js')}")

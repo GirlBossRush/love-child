@@ -1,9 +1,9 @@
 AmpersandRestCollection = require("ampersand-rest-collection/ampersand-rest-collection")
 Story                   = require("../models/story")
-apiPath                 = require("../constants").apiPath
+pathHelper              = require("../../../util/path-helper")
 
 Stories = AmpersandRestCollection.extend
-  url: apiPath("stories")
+  url: pathHelper.api("stories")
   model: Story
 
 module.exports = Stories
