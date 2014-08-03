@@ -84,20 +84,30 @@ StoryEditor = React.createClass
       @state.isSaved = false
       @forceUpdate()
 
-      for field in contentEditableFields
-        @state.story[field] = @refs[field].getDOMNode().innerHTML
+      @updateContentEditableFields()
 
       @saveStory()
 
-  # Contenteditable fields must be assigned outside of React's update cycle.
-  # Otherwise the cursor position will be lost on each update.
   componentDidMount: ->
+    @populateContentEditableFields()
+
+    body = @refs.body.getDOMNode()
+
+    # Setup editor controls.
+    new MediumEditor(body)
+
+    body.focus()
+
+  populateContentEditableFields: ->
+    # Contenteditable fields must be assigned outside of React's update cycle.
+    # Otherwise the cursor position will be lost on each update.
     for field in contentEditableFields
       @refs[field].getDOMNode().innerHTML = @state.story[field]
 
-    body = @refs.body.getDOMNode()
-    body.innerHTML = @state.story.body
-    new MediumEditor(body)
+  updateContentEditableFields: ->
+    # Fetch data from DOM, update model attributes.
+    for field in contentEditableFields
+      @state.story[field] = @refs[field].getDOMNode().innerHTML
 
   getInitialState: ->
     isSaving: false
