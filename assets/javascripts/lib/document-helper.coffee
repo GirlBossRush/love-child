@@ -4,6 +4,7 @@
 History  = require("ampersand-router/ampersand-history")
 _        = require("underscore")
 React    = require("react")
+config   = require("../../../config/application")
 
 DocumentHelper =
   # Sugar.
@@ -32,7 +33,7 @@ DocumentHelper =
 Object.defineProperty DocumentHelper, "title",
   # Use base title if no prefix is provided. Arrays will be split and delimited.
   set: (value) ->
-    base = "Love Child"
+    base = config.DEFAULT_TITLE
 
     title = if value?
       if $.isArray(value)
