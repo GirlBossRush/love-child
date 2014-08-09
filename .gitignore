@@ -12,3 +12,6 @@
 node_modules/**/*
 vendor/assets/bower_components/**/*
 
+# Credentials.
+config/aws.yml
+
