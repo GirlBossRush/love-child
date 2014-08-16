@@ -14,6 +14,7 @@ navigationItems   = require("./components/shared/side-menu/navigation-items")
 window.$ = require("jquery")
 
 $ ->
+  document.documentElement.classList.remove("no-js")
   new ApplicationRouter()
   new StoriesRouter()
 
