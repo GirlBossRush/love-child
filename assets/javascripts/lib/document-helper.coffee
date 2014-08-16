@@ -1,10 +1,12 @@
 # A collection of document related methods.
 
-
-History  = require("ampersand-router/ampersand-history")
-_        = require("underscore")
-React    = require("react")
-config   = require("../../../config/application")
+History            = require("ampersand-router/ampersand-history")
+_                  = require("underscore")
+React              = require("react")
+config             = require("../../../config/application")
+Exceptions         = require("./document-helper/exceptions")
+fullscreenPolyfill = require("./document-helper/fullscreen-polyfill")
+d                  = document
 
 DocumentHelper =
   # Sugar.
@@ -12,10 +14,9 @@ DocumentHelper =
 
   # Components should only be rendered out to an anchor listed here.
   anchors:
-    mainContent:  document.getElementById("main-content")
-    aboveContent: document.getElementById("above-content")
-    asideContent: document.getElementById("aside-content")
-    routes: document.getElementById("routes")
+    mainContent:  d.getElementById("main-content")
+    aboveContent: d.getElementById("above-content")
+    asideContent: d.getElementById("aside-content")
 
   render: (options = {}) ->
     _.defaults options,
@@ -48,22 +49,20 @@ Object.defineProperty DocumentHelper, "title",
     else
       base
 
-    document.title = title
+    d.title = title
 
   get: ->
-    document.title
+    d.title
 
+# Abstract fullscreen API.
+Object.defineProperty DocumentHelper, "fullscreen",
+  set: (enabled) ->
+    if enabled
+      d.documentElement.requestFullscreen()
+    else
+      d.exitFullscreen()
 
-# --- Exceptions ---
-
-Exceptions =
-  UnknownAnchor: (anchor) ->
-    @anchor = anchor
-    @message = "Unable to find anchor"
-
-    @toString = ->
-      "#{@message}: #{@anchor}"
-
-    return
+  get: ->
+    !!document.fullscreenElement
 
 module.exports = DocumentHelper
