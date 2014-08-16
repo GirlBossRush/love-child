@@ -33,7 +33,7 @@ module.exports = React.createClass
       icon  = "remove"
       label = "Close"
 
-    R.span {className: "toggle-fullscreen", onClick: @toggleFullscreen},
+    R.span {className: "toggle-fullscreen no-print", onClick: @toggleFullscreen},
       R.span {className: "toggle-label"}, label
       R.span {className: "glyphicon glyphicon-#{icon} toggle-icon"}
 

@@ -18,6 +18,6 @@ module.exports = React.createClass
       R.span {className: "accent glyphicon glyphicon-#{item.icon}"}, ""
 
   render: ->
-    R.div {className: "menu-content"},
+    R.div {className: "menu-content no-print"},
       R.ul {className: "list-group"},
         @props.navigationItems.map(@navigationItem)
