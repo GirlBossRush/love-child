@@ -25,7 +25,7 @@ module.exports = [
 
   {
     label: "Settings"
-    icon: "user"
+    icon: "wrench"
     path: "/settings"
   }
 
