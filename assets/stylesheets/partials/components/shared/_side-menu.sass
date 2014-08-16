@@ -52,3 +52,13 @@ $width-delta: $expanded-width - $collapsed-width
 html.csstransforms3d #aside-content
   .menu-content .list-group-item:hover
     +transform(translate3d($width-delta, 0, 0))
+
+// ---- Fullscreen mode ----
+
+html.fullscreen
+  #aside-content
+    opacity: 0.15
+    transition: opacity 100ms linear
+
+    &:hover
+      opacity: 1
