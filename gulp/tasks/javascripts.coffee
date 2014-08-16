@@ -10,7 +10,7 @@ gulp.task "javascripts", ->
 
   bundler = bundleMethod(
     entries: ["./assets/javascripts/application.coffee"]
-    extensions: [".coffee"]
+    extensions: [".js", ".coffee"]
   )
 
   bundle = ->
