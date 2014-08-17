@@ -1,11 +1,12 @@
 gulp       = require("gulp")
 jade       = require("gulp-jade")
 config     = require("../../config/application")
+meta       = require("../../config/meta-attributes")
 pathHelper = require("../../util/path-helper")
 
 options =
   pretty: config.ENVIRONMENT is "development"
-  locals: {config, pathHelper}
+  locals: {config, pathHelper, meta}
 
 gulp.task "templates", ->
   gulp.src "assets/templates/**/*.jade"

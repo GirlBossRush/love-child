@@ -12,7 +12,7 @@ else
 
 module.exports =
   api: (path = "") ->
-    "#{api_base}/#{path}"
+    "//#{api_base}/#{path}"
 
   asset: (path = "") ->
-    "#{app_base}/assets/#{path}"
+    "//#{app_base}/assets/#{path}"

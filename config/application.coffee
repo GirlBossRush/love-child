@@ -1,4 +1,4 @@
-_ = require("underscore")
+_    = require("underscore")
 
 environment = if window?
   # Running within browser.
@@ -8,7 +8,6 @@ else
   process.env.NODE_ENV or "development"
 
 config =
-  DEFAULT_TITLE: "Alternative Fiction"
   ENVIRONMENT: environment
 
 environmentConfig = switch environment
