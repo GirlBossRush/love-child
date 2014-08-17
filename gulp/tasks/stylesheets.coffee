@@ -1,5 +1,7 @@
-gulp = require("gulp")
-sass = require("gulp-ruby-sass")
+gulp         = require("gulp")
+sass         = require("gulp-ruby-sass")
+ENVIRONMENT  = require("../../config/application").ENVIRONMENT
+
 
 options =
   style: "expanded"
@@ -10,6 +12,10 @@ options =
     "#{process.cwd()}/vendor/assets/stylesheets"
     "#{process.cwd()}/vendor/assets/bower_components"
   ]
+
+if ENVIRONMENT is "production"
+  options.style     = "compressed"
+  options.sourcemap = true
 
 gulp.task "stylesheets", ->
   gulp.src "assets/stylesheets/application.sass"
