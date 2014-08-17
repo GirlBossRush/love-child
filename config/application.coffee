@@ -1,11 +1,11 @@
 _ = require("underscore")
 
-environment = if module? and not window?.module?
-  # Running within server.
-  process.env.NODE_ENV or "development"
-else
+environment = if window?
   # Running within browser.
   localStorage["environment"]
+else
+  # Running within server.
+  process.env.NODE_ENV or "development"
 
 config =
   DEFAULT_TITLE: "Alternative Fiction"
