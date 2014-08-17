@@ -9,6 +9,7 @@ Story = AmpersandModel.extend
     id: "integer"
     title: "string"
     description: "string"
+    author: "string"
     body: "string"
     created_at: "string"
     updated_at: "string"
