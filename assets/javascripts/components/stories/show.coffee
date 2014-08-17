@@ -1,6 +1,7 @@
 React               = require("react")
 R                   = React.DOM
 humanTime           = require("../shared/human-time")
+estimateReadingTime = require("../shared/estimate-reading-time")
 DocumentHelper      = require("../../lib/document-helper")
 viewControls        = require("./show/view-controls")
 
@@ -16,6 +17,7 @@ module.exports = React.createClass
         R.div {className: "description"}, @props.story.description
         R.div {className: "author"}, @props.story.author
         humanTime {datetime: @props.story.updated_at}
+        estimateReadingTime {words: @state.bodyText}
         R.hr {className: "section-seperator"}
 
       R.article
