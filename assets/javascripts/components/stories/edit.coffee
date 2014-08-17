@@ -1,6 +1,6 @@
 React                  = require("react")
 R                      = React.DOM
-HumanTime              = require("../shared/human-time")
+humanTime              = require("../shared/human-time")
 _                      = require("underscore")
 
 MediumEditor = require("medium-editor")
@@ -30,7 +30,7 @@ StoryEditor = React.createClass
           ref: "description"
 
         R.div {className: "author"}, @state.story.author
-        HumanTime {datetime: @state.story.updated_at}
+        humanTime {datetime: @state.story.updated_at}
         R.hr {className: "section-seperator"}
 
       R.article
