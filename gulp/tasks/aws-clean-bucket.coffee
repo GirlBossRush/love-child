@@ -10,7 +10,8 @@ configFile    = fs.readFileSync("./config/aws.yml", "utf8")
 
 gulp.task "aws-clean-bucket", ->
   if ENVIRONMENT is "development"
-    throw "Cannot clean bucket files in development."
+    throw "Cannot clean bucket files in development.
+    Assign `NODE_ENV` before running task."
 
   config        = yaml.safeLoad(configFile)[ENVIRONMENT]
   defaultParams = { Bucket: config.bucket }
