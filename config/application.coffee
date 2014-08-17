@@ -1,17 +1,19 @@
 argv        = require("yargs").argv
+_           = require("underscore")
 environment = argv.environment or "development"
 
-module.exports =
+config =
   DEFAULT_TITLE: "Alternative Fiction"
-
   ENVIRONMENT: environment
 
-  APP_BASE: if environment is "production"
-    "//alternativefiction.org"
+environmentConfig = switch environment
+  when "development"
+    require("./environments/development")
+  when "production"
+    require("./environments/production")
   else
-    "//localhost:3000"
+    throw "Unknown environment: #{environment}"
 
-  API_BASE: if environment is "production"
-    "//api.alternativefiction.org"
-  else
-    "//localhost:3001"
+_.extend(config, environmentConfig)
+
+module.exports = config
