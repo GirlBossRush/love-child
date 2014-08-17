@@ -1,21 +1,27 @@
-fs   = require("fs")
-yaml = require("js-yaml")
-gulp = require("gulp")
-_    = require("underscore")
-
-AWS  = require("aws-sdk")
-util = require("../util/s3")
+fs          = require("fs")
+yaml        = require("js-yaml")
+gulp        = require("gulp")
+_           = require("underscore")
+ENVIRONMENT = require("../../config/application").ENVIRONMENT
+AWS         = require("aws-sdk")
+util        = require("../util/s3")
 
 configFile    = fs.readFileSync("./config/aws.yml", "utf8")
-config        = yaml.safeLoad(configFile)
-defaultParams = { Bucket: config.bucket }
 
-_.extend AWS.config,
-  region: "us-east-1"
-  accessKeyId: config.key
-  secretAccessKey: config.secret
 
 gulp.task "aws-clean-bucket", ->
+  if ENVIRONMENT is "development"
+    console.error "Cannot clean files in development."
+    return
+
+  config        = yaml.safeLoad(configFile)[ENVIRONMENT]
+  defaultParams = { Bucket: config.bucket }
+
+  _.extend AWS.config,
+    region: "us-east-1"
+    accessKeyId: config.key
+    secretAccessKey: config.secret
+
   client = new AWS.S3
 
   util.fetchObjects client, defaultParams, (objects) ->

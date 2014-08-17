@@ -1,0 +1,9 @@
+staging:
+  key: "abc123"
+  secret: "def456"
+  bucket: "staging.alternativefiction.org"
+
+production:
+  key: "abc123"
+  secret: "def456"
+  bucket: "alternativefiction.org"
