@@ -11,8 +11,7 @@ headers    = {"Cache-Control": "max-age=#{cacheTime}, public"}
 
 gulp.task "aws-publish", ->
   if ENVIRONMENT is "development"
-    console.error "Cannot publish files in development."
-    return
+    throw "Cannot publish files in development."
 
   config = yaml.safeLoad(configFile)[ENVIRONMENT]
   console.log "Deploying to #{config.bucket}"

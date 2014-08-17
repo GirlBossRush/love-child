@@ -8,11 +8,9 @@ util        = require("../util/s3")
 
 configFile    = fs.readFileSync("./config/aws.yml", "utf8")
 
-
 gulp.task "aws-clean-bucket", ->
   if ENVIRONMENT is "development"
-    console.error "Cannot clean files in development."
-    return
+    throw "Cannot clean bucket files in development."
 
   config        = yaml.safeLoad(configFile)[ENVIRONMENT]
   defaultParams = { Bucket: config.bucket }
