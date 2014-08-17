@@ -4,7 +4,7 @@ config     = require("../../config/application")
 pathHelper = require("../../util/path-helper")
 
 options =
-  pretty: true
+  pretty: config.ENVIRONMENT is "development"
   locals: {config, pathHelper}
 
 gulp.task "templates", ->
