@@ -2,7 +2,7 @@ _ = require("underscore")
 
 environment = if window?
   # Running within browser.
-  localStorage["environment"]
+  localStorage["ENVIRONMENT"]
 else
   # Running within server.
   process.env.NODE_ENV or "development"
