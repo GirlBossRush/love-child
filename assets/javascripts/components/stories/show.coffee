@@ -23,8 +23,8 @@ module.exports = React.createClass
       R.article
         ref: "body"
         className: "body"
-        "data-paragraph-width": @state.paragraphWidth
-        "data-paragraph-font-size": @state.paragraphWidth
+        "data-width": @state.paragraphWidth
+        "data-font-size": @state.paragraphWidth
         dangerouslySetInnerHTML:
           __html: @props.story.body
 
