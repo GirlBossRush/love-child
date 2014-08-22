@@ -14,7 +14,7 @@ module.exports = React.createClass
 
   navigationItem: (item) ->
     R.li {className: "list-group-item", key: item.path, onClick: @navigate.bind(this, item.path)},
-      item.label
+      R.span {className: "item-label"}, item.label
       R.span {className: "accent glyphicon glyphicon-#{item.icon}"}, ""
 
   render: ->
