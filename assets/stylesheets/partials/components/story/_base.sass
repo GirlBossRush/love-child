@@ -1,11 +1,5 @@
 .story
-  width: 60%
-  max-width: 940px
-
   margin: 16px auto
-
-  line-height: 30px
-  font-size: 18px
 
   .toggle-fullscreen
     position: fixed
@@ -14,6 +8,7 @@
 
     text-transform: lowercase
     font-variant: small-caps
+    font-family: $font-family-accent
     color: $gray-light
 
     cursor: pointer
@@ -65,7 +60,18 @@
 
   .body
     p
-      border: 1px solid $offwhite
+      font-family: $font-family-serif
 
+      margin-right: auto
+      margin-left: auto
+
+    &[data-paragraph-width="default"]
+      p
+        width: 700px
+
+      &[data-paragraph-font-size="default"]
+        p
+          font-size: 22px
+          line-height: 1.5
 
 

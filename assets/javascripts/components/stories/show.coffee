@@ -23,6 +23,8 @@ module.exports = React.createClass
       R.article
         ref: "body"
         className: "body"
+        "data-paragraph-width": @state.paragraphWidth
+        "data-paragraph-font-size": @state.paragraphWidth
         dangerouslySetInnerHTML:
           __html: @props.story.body
 
@@ -35,4 +37,6 @@ module.exports = React.createClass
     @forceUpdate()
 
   getInitialState: ->
+    paragraphFontSize: "default"
+    paragraphWidth: "default"
     bodyText: ""
