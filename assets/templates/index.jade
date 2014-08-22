@@ -4,6 +4,15 @@ html.no-js(lang="en-US")
   head
     title= meta.title
 
+    script.
+      localStorage["ENVIRONMENT"] = "#{config.ENVIRONMENT}"
+      localStorage["APP_BASE"]    = "#{config.APP_BASE}"
+      localStorage["API_BASE"]    = "#{config.API_BASE}"
+
+    script(src="//use.typekit.net/pxi7oym.js")
+    script.
+      try{Typekit.load();}catch(e){}
+
     link(rel="stylesheet" type="text/css" href="#{pathHelper.asset('application.css')}")
     link(rel="shortcut icon" href="#{pathHelper.asset('foundation/glyph-logo-small.png')}")
     link(rel="canonical" href="http://#{config.APP_BASE}")
@@ -18,11 +27,6 @@ html.no-js(lang="en-US")
     meta(name="og:title" content="#{meta.title}")
     meta(name="og:site_name" content="#{meta.title}")
     meta(name="og:url" content="http://#{config.APP_BASE}")
-
-    script.
-      localStorage["ENVIRONMENT"] = "#{config.ENVIRONMENT}"
-      localStorage["APP_BASE"]    = "#{config.APP_BASE}"
-      localStorage["API_BASE"]    = "#{config.API_BASE}"
 
   body(spellcheck=true)
     noscript
