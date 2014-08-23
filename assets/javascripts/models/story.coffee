@@ -1,12 +1,11 @@
 AmpersandModel = require("../lib/ampersand-rails-model")
 pathHelper     = require("../../../util/path-helper")
 
-
 Story = AmpersandModel.extend
   name: "story"
 
   props:
-    id: "integer"
+    id: "string"
     title: "string"
     description: "string"
     author: "string"
