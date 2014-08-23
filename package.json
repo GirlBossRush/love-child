@@ -1,7 +1,7 @@
 {
   "name": "love-child",
   "devDependencies": {
-    "browserify": "~5.10.0",
+    "browserify": "~5.10.1",
     "coffeeify": "~0.7.0",
     "gulp": "~3.8.6",
     "coffee-script": "~1.7.1",
