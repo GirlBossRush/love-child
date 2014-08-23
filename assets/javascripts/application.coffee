@@ -5,6 +5,7 @@ DocumentHelper    = require("./lib/document-helper")
 
 ApplicationRouter = require("./routers/application")
 StoriesRouter     = require("./routers/stories")
+UsersRouter       = require("./routers/users")
 History           = require("ampersand-router/ampersand-history")
 
 SideMenu          = require("./components/shared/side-menu")
@@ -17,6 +18,7 @@ $ ->
   document.documentElement.classList.remove("no-js")
   new ApplicationRouter()
   new StoriesRouter()
+  new UsersRouter()
 
   History.start(pushState: true)
 
