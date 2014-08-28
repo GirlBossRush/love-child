@@ -5,6 +5,7 @@ ENVIRONMENT  = require("../../config/application").ENVIRONMENT
 
 options =
   style: "expanded"
+  lineNumbers: true
   precision: 8
   loadPath: [
     "#{process.cwd()}/assets/stylesheets"
