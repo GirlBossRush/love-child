@@ -47,7 +47,7 @@ module.exports = React.createClass
 
   setTitle: ->
     title = @props.story.title.replace("&nbsp;", "")
-    documentHelper.title = [title, "Stories"]
+    documentHelper.title = title
 
   getInitialState: ->
     paragraphFontSize: userPreferences.stories.fontSize

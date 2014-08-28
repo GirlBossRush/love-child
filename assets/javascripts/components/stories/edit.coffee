@@ -96,8 +96,6 @@ StoryEditor = React.createClass
   componentWillUpdate: ->
     body            = @refs.body.getDOMNode()
     @state.bodyText = body.textContent
-
-  componentDidUpdate: ->
     @setTitle()
 
   componentDidMount: ->
@@ -114,8 +112,8 @@ StoryEditor = React.createClass
     body.focus()
 
   setTitle: ->
-    title = @state.story.title.replace("&nbsp;", "")
-    documentHelper.title = ["Edit", title, "Stories"]
+    title     = @state.story.title.replace("&nbsp;", "")
+    documentHelper.title = ["Editing #{title}"]
 
   populateContentEditableFields: ->
     # Contenteditable fields must be assigned outside of React's update cycle.
