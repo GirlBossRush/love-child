@@ -4,14 +4,18 @@ humanTime           = require("../shared/human-time")
 estimateReadingTime = require("../shared/estimate-reading-time")
 documentHelper      = require("../../lib/document-helper")
 userPreferences     = require("../users/preferences")
-viewControls        = require("./show/view-controls")
+viewControls        = require("./shared/view-controls")
+fullscreenToggle    = require("./shared/view-controls/fullscreen-toggle")
 
 module.exports = React.createClass
   displayName: "story"
 
   render: ->
     R.section {className: "story"},
-      viewControls(@props.story)
+      viewControls
+        primaryControls: [
+          fullscreenToggle
+        ]
 
       R.header {className: "headline"},
         R.div {className: "title", ref: "title"}, @props.story.title

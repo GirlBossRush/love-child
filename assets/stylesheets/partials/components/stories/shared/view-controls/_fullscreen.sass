@@ -1,0 +1,26 @@
+.view-controls .toggle-fullscreen
+  +user-select(none)
+
+  display: inline-block
+  vertical-align: middle
+
+  text-transform: lowercase
+  font-variant: small-caps
+  font-family: $font-family-accent
+  color: $gray-light
+
+  cursor: pointer
+
+  transition: color 100ms linear
+
+  &:hover
+    color: $text-color
+
+  .toggle-label
+    display: inline-block
+    vertical-align: middle
+
+  .toggle-icon
+    vertical-align: middle
+    margin-top: 1px
+    margin-left: 8px

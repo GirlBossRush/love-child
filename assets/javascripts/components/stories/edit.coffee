@@ -1,11 +1,15 @@
-React           = require("react")
-R               = React.DOM
-documentHelper  = require("../../lib/document-helper")
-userPreferences = require("../users/preferences")
-humanTime       = require("../shared/human-time")
-validations     = require("./shared/validations")
-_               = require("underscore")
-MediumEditor    = require("medium-editor")
+React            = require("react")
+R                = React.DOM
+documentHelper   = require("../../lib/document-helper")
+userPreferences  = require("../users/preferences")
+humanTime        = require("../shared/human-time")
+validations      = require("./shared/validations")
+viewControls     = require("./shared/view-controls")
+savedState       = require("./shared/view-controls/saved-state")
+fullscreenToggle = require("./shared/view-controls/fullscreen-toggle")
+_                = require("underscore")
+MediumEditor     = require("medium-editor")
+
 
 UPDATE_THROTTLE = 1500
 contentEditableFields = ["title", "description", "body"]
@@ -15,7 +19,14 @@ StoryEditor = React.createClass
 
   render: ->
     R.section {className: "story edit"},
-      @saveStateRender()
+      viewControls
+        primaryControls: [
+          savedState.bind this,
+            isSaving: @state.isSaving
+            isSaved: @state.isSaved
+
+          fullscreenToggle
+        ]
 
       R.header {className: "headline"},
         R.div
@@ -46,22 +57,6 @@ StoryEditor = React.createClass
         onInput: @handleContentUpdate
 
       R.footer {className: "summary"}
-
-  saveStateRender: ->
-    attributes = if !@state.isSaving and !@state.isSaved
-      text: "Unsaved"
-      className: "unsaved"
-    else if @state.isSaving
-      text: "Saving"
-      className: "saving"
-    else if @state.isSaved
-      text: "Saved"
-      className: "saved"
-    else
-      text: "?"
-      className: "unknown"
-
-    R.aside {className: "save-state #{attributes.className}"}, attributes.text
 
   saveStory: _.debounce ->
     model = @state.model

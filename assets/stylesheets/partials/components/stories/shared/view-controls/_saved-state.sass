@@ -1,0 +1,21 @@
+.view-controls .save-state
+  +user-select(none)
+  cursor: default
+
+  display: inline-block
+  vertical-align: middle
+
+  text-transform: lowercase
+  font-variant: small-caps
+
+
+  border-bottom: 2px solid #000
+
+  &.unsaved
+    border-bottom-color: $brand-warning
+
+  &.saving
+    border-bottom-color: $brand-primary
+
+  &.saved
+    border-bottom-color: $brand-success
