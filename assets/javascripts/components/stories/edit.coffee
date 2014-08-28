@@ -112,7 +112,7 @@ StoryEditor = React.createClass
     body.focus()
 
   setTitle: ->
-    title     = @state.story.title.replace("&nbsp;", "")
+    title = @state.story.title?.replace("&nbsp;", "") or "untitled"
     documentHelper.title = ["Editing #{title}"]
 
   populateContentEditableFields: ->
