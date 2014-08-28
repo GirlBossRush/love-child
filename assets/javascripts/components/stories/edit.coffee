@@ -1,10 +1,11 @@
-React          = require("react")
-R              = React.DOM
-documentHelper = require("../../lib/document-helper")
-humanTime      = require("../shared/human-time")
-validations    = require("./shared/validations")
-_              = require("underscore")
-MediumEditor   = require("medium-editor")
+React           = require("react")
+R               = React.DOM
+documentHelper  = require("../../lib/document-helper")
+userPreferences = require("../users/preferences")
+humanTime       = require("../shared/human-time")
+validations     = require("./shared/validations")
+_               = require("underscore")
+MediumEditor    = require("medium-editor")
 
 UPDATE_THROTTLE = 1500
 contentEditableFields = ["title", "description", "body"]
@@ -18,27 +19,29 @@ StoryEditor = React.createClass
 
       R.header {className: "headline"},
         R.div
+          ref: "title"
           className: "title"
           onInput: @handleContentUpdate
           contentEditable: true
           "data-placeholder": "Title"
-          ref: "title"
 
         R.div
+          ref: "description"
           className: "description",
           "data-placeholder": "Description"
           onInput: @handleContentUpdate,
           contentEditable: true
-          ref: "description"
 
         R.div {className: "author"}, @state.story.author
         humanTime {datetime: @state.story.updated_at}
         R.hr {className: "section-seperator"}
 
       R.article
-        className: "body"
-        "data-placeholder": "Your story begins..."
         ref: "body"
+        className: "body"
+        "data-width": @state.paragraphWidth
+        "data-font-size": @state.paragraphFontSize
+        "data-placeholder": "Your story begins..."
         contentEditable: true
         onInput: @handleContentUpdate
 
@@ -123,6 +126,9 @@ StoryEditor = React.createClass
       @state.story[field] = @refs[field].getDOMNode().innerHTML
 
   getInitialState: ->
+    paragraphFontSize: userPreferences.stories.fontSize
+    paragraphWidth: userPreferences.stories.paragraphWidth
+
     isSaving: false
     isSaved: true
 
