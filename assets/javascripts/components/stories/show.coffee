@@ -2,7 +2,8 @@ React               = require("react")
 R                   = React.DOM
 humanTime           = require("../shared/human-time")
 estimateReadingTime = require("../shared/estimate-reading-time")
-DocumentHelper      = require("../../lib/document-helper")
+documentHelper      = require("../../lib/document-helper")
+userPreferences     = require("../users/preferences")
 viewControls        = require("./show/view-controls")
 
 module.exports = React.createClass
@@ -24,7 +25,7 @@ module.exports = React.createClass
         ref: "body"
         className: "body"
         "data-width": @state.paragraphWidth
-        "data-font-size": @state.paragraphWidth
+        "data-font-size": @state.paragraphFontSize
         dangerouslySetInnerHTML:
           __html: @props.story.body
 
@@ -38,9 +39,9 @@ module.exports = React.createClass
 
   componentDidUpdate: ->
     title = @props.story.title.replace("&nbsp;", "")
-    DocumentHelper.title = [title, "Stories"]
+    documentHelper.title = [title, "Stories"]
 
   getInitialState: ->
-    paragraphFontSize: "default"
-    paragraphWidth: "default"
+    paragraphFontSize: userPreferences.stories.fontSize
+    paragraphWidth: userPreferences.stories.paragraphWidth
     bodyText: ""
