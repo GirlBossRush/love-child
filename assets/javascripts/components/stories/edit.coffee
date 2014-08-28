@@ -10,6 +10,8 @@ savedState           = require("./shared/view-controls/saved-state")
 fullscreenToggle     = require("./shared/view-controls/fullscreen-toggle")
 _                    = require("underscore")
 MediumEditor         = require("medium-editor")
+htmlToText           = require("html-to-text")
+
 
 
 UPDATE_THROTTLE = 1500
@@ -26,7 +28,7 @@ StoryEditor = React.createClass
             isSaving: @state.isSaving
             isSaved: @state.isSaved
 
-          estimatedReadingTime.bind(this, words: @state.bodyText)
+          estimatedReadingTime.bind(this, textComponent: @refs.body, text: htmlToText.fromString(@state.story.body) )
 
           fullscreenToggle
         ]
@@ -94,8 +96,6 @@ StoryEditor = React.createClass
       @saveStory()
 
   componentWillUpdate: ->
-    body            = @refs.body.getDOMNode()
-    @state.bodyText = body.textContent
     @setTitle()
 
   componentDidMount: ->
@@ -139,6 +139,5 @@ StoryEditor = React.createClass
 
     model: @props.model
     story: @props.model
-    bodyText: ""
 
 module.exports = StoryEditor

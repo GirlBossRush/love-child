@@ -6,6 +6,7 @@ documentHelper       = require("../../lib/document-helper")
 userPreferences      = require("../users/preferences")
 viewControls         = require("./shared/view-controls")
 fullscreenToggle     = require("./shared/view-controls/fullscreen-toggle")
+htmlToText           = require("html-to-text")
 
 module.exports = React.createClass
   displayName: "story"
@@ -14,7 +15,7 @@ module.exports = React.createClass
     R.section {className: "story"},
       viewControls
         primaryControls: [
-          estimatedReadingTime.bind(this, words: @state.bodyText)
+          estimatedReadingTime.bind(this, textComponent: @refs.body, text: htmlToText.fromString(@props.story.body) )
           fullscreenToggle
         ]
 
@@ -37,9 +38,6 @@ module.exports = React.createClass
 
   componentDidMount: ->
     @setTitle()
-    # Body text can be extracted from the initial HTML string after mounting.
-    body            = @refs.body.getDOMNode()
-    @state.bodyText = body.textContent
     @forceUpdate()
 
   componentDidUpdate: ->
@@ -52,4 +50,3 @@ module.exports = React.createClass
   getInitialState: ->
     paragraphFontSize: userPreferences.stories.fontSize
     paragraphWidth: userPreferences.stories.paragraphWidth
-    bodyText: ""
