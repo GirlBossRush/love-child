@@ -32,12 +32,16 @@ module.exports = React.createClass
       R.footer {className: "summary"}
 
   componentDidMount: ->
+    @setTitle()
     # Body text can be extracted from the initial HTML string after mounting.
     body            = @refs.body.getDOMNode()
     @state.bodyText = body.textContent
     @forceUpdate()
 
   componentDidUpdate: ->
+    @setTitle()
+
+  setTitle: ->
     title = @props.story.title.replace("&nbsp;", "")
     documentHelper.title = [title, "Stories"]
 

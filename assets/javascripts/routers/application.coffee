@@ -8,16 +8,10 @@ ApplicationRouter = AmpersandRouter.extend
     '*undefined': 'notFound'
 
   foundation: ->
-    documentHelper.title = null
-
-    console.log "foundation"
-
     documentHelper.render
       component: ErrorPage(code: 204, path: '/')
 
   notFound: (path) ->
-    documentHelper.title = "404 - Error"
-
     documentHelper.render
       component: ErrorPage({code: 404, path})
 
