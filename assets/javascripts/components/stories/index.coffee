@@ -2,12 +2,12 @@
 # Arguments:
 # * Stories: Backbone Collection.
 
-DocumentHelper         = require("../../lib/document-helper")
-React                  = require("react")
-R                      = React.DOM
+documentHelper = require("../../lib/document-helper")
+React          = require("react")
+R              = React.DOM
 
-HumanTime              = require("../shared/human-time")
-Modal                  = require("../shared/modal")
+HumanTime      = require("../shared/human-time")
+Modal          = require("../shared/modal")
 
 StoryList = React.createClass
   displayName: "storyList"
@@ -58,13 +58,13 @@ StoryList = React.createClass
         }, "No"
       ]
 
-    DocumentHelper.render
+    documentHelper.render
       anchor: "aboveContent"
       component: confirmationModal
 
   navigateStory: (href, e) ->
     e.preventDefault()
-    DocumentHelper.navigate href, true
+    documentHelper.navigate href, true
 
   delete: (id) ->
     model = @props.collection.get(id)
@@ -74,6 +74,6 @@ StoryList = React.createClass
         @props.collection.remove(model)
         @forceUpdate()
 
-        DocumentHelper.title = "(#{@props.collection.length}) Stories"
+        documentHelper.title = "(#{@props.collection.length}) Stories"
 
 module.exports = StoryList

@@ -10,7 +10,7 @@ fullscreenPolyfill = require("./document-helper/fullscreen-polyfill")
 d                  = document
 
 
-DocumentHelper =
+documentHelper =
   # Sugar.
   navigate: History.navigate.bind(History)
 
@@ -33,7 +33,7 @@ DocumentHelper =
       throw new Exceptions.UnknownAnchor(options.anchor)
 
 # Treat the document title like a property.
-Object.defineProperty DocumentHelper, "title",
+Object.defineProperty documentHelper, "title",
   # Use base title if no prefix is provided. Arrays will be split and delimited.
   set: (value) ->
     base = meta.title
@@ -57,7 +57,7 @@ Object.defineProperty DocumentHelper, "title",
     d.title
 
 # Abstract fullscreen API.
-Object.defineProperty DocumentHelper, "fullscreen",
+Object.defineProperty documentHelper, "fullscreen",
   set: (enabled) ->
     if enabled
       d.documentElement.requestFullscreen()
@@ -67,4 +67,4 @@ Object.defineProperty DocumentHelper, "fullscreen",
   get: ->
     !!document.fullscreenElement
 
-module.exports = DocumentHelper
+module.exports = documentHelper

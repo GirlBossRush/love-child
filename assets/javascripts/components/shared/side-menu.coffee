@@ -4,13 +4,13 @@
 
 React          = require("react")
 R              = React.DOM
-DocumentHelper = require("../../lib/document-helper")
+documentHelper = require("../../lib/document-helper")
 
 module.exports = React.createClass
   displayName: "sideMenu"
 
   navigate: (path) ->
-    DocumentHelper.navigate(path, true)
+    documentHelper.navigate(path, true)
 
   navigationItem: (item) ->
     R.li {className: "list-group-item", key: item.path, onClick: @navigate.bind(this, item.path)},

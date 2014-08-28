@@ -1,6 +1,6 @@
 React          = require("react")
 R              = React.DOM
-DocumentHelper = require("../../lib/document-helper")
+documentHelper = require("../../lib/document-helper")
 humanTime      = require("../shared/human-time")
 validations    = require("./shared/validations")
 _              = require("underscore")
@@ -90,7 +90,7 @@ StoryEditor = React.createClass
 
   componentDidUpdate: ->
     title = @state.story.title.replace("&nbsp;", "")
-    DocumentHelper.title = ["Edit", title, "Stories"]
+    documentHelper.title = ["Edit", title, "Stories"]
 
   componentDidMount: ->
     @populateContentEditableFields()

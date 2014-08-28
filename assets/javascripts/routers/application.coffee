@@ -1,5 +1,5 @@
 AmpersandRouter = require("ampersand-router/ampersand-router")
-DocumentHelper  = require("../lib/document-helper")
+documentHelper  = require("../lib/document-helper")
 ErrorPage       = require("../components/errors/error-page")
 
 ApplicationRouter = AmpersandRouter.extend
@@ -8,17 +8,17 @@ ApplicationRouter = AmpersandRouter.extend
     '*undefined': 'notFound'
 
   foundation: ->
-    DocumentHelper.title = null
+    documentHelper.title = null
 
     console.log "foundation"
 
-    DocumentHelper.render
+    documentHelper.render
       component: ErrorPage(code: 204, path: '/')
 
   notFound: (path) ->
-    DocumentHelper.title = "404 - Error"
+    documentHelper.title = "404 - Error"
 
-    DocumentHelper.render
+    documentHelper.render
       component: ErrorPage({code: 404, path})
 
 module.exports = ApplicationRouter

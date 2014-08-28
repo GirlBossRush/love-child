@@ -1,7 +1,7 @@
 #= require modernizr/modernizr
 #= require bootstrap
 
-DocumentHelper    = require("./lib/document-helper")
+documentHelper    = require("./lib/document-helper")
 
 ApplicationRouter = require("./routers/application")
 StoriesRouter     = require("./routers/stories")
@@ -22,6 +22,6 @@ $ ->
 
   History.start(pushState: true)
 
-  DocumentHelper.render
+  documentHelper.render
     component: SideMenu({navigationItems})
     anchor: "asideContent"

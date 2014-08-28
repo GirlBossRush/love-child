@@ -2,12 +2,12 @@
 # Arguments:
 # * Users: Backbone Collection.
 
-DocumentHelper         = require("../../lib/document-helper")
-React                  = require("react")
-R                      = React.DOM
+documentHelper = require("../../lib/document-helper")
+React          = require("react")
+R              = React.DOM
 
-HumanTime              = require("../shared/human-time")
-Modal                  = require("../shared/modal")
+HumanTime      = require("../shared/human-time")
+Modal          = require("../shared/modal")
 
 usersList = React.createClass
   displayName: "users-list"
@@ -57,13 +57,13 @@ usersList = React.createClass
         }, "No"
       ]
 
-    DocumentHelper.render
+    documentHelper.render
       anchor: "aboveContent"
       component: confirmationModal
 
   navigateUser: (href, e) ->
     e.preventDefault()
-    DocumentHelper.navigate href, true
+    documentHelper.navigate href, true
 
   delete: (id) ->
     model = @props.collection.get(id)
@@ -73,6 +73,6 @@ usersList = React.createClass
         @props.collection.remove(model)
         @forceUpdate()
 
-        DocumentHelper.title = "(#{@props.collection.length}) users"
+        documentHelper.title = "(#{@props.collection.length}) users"
 
 module.exports = usersList

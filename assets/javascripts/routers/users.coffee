@@ -1,7 +1,7 @@
 AmpersandRouter = require("ampersand-router/ampersand-router")
 
 react          = require("react")
-DocumentHelper = require("../lib/document-helper")
+documentHelper = require("../lib/document-helper")
 
 User           = require("../models/user")
 Users          = require("../collections/users")
@@ -21,9 +21,9 @@ usersRouter = AmpersandRouter.extend
 
     users.fetch
       success: (collection) ->
-        DocumentHelper.title = "(#{collection.length}) users"
+        documentHelper.title = "(#{collection.length}) users"
 
-        DocumentHelper.render
+        documentHelper.render
           component: views.index({collection})
 
   show: (id) ->
@@ -31,26 +31,26 @@ usersRouter = AmpersandRouter.extend
 
     user.fetch
       success: (model) ->
-        DocumentHelper.title = [model.attributes.title, "users"]
+        documentHelper.title = [model.attributes.title, "users"]
 
         debugger
-        DocumentHelper.render
+        documentHelper.render
           component: views.show(user: model)
 
   new: ->
     user = new User()
     user.save {body: "hello!"},
       success: (model) ->
-        DocumentHelper.navigate("/users/#{model.id}/edit", true)
+        documentHelper.navigate("/users/#{model.id}/edit", true)
 
   edit: (id) ->
     user = new User({id})
 
     user.fetch
       success: (model) ->
-        DocumentHelper.title = ["Edit", model.attributes.title, "users"]
+        documentHelper.title = ["Edit", model.attributes.title, "users"]
 
-        DocumentHelper.render
+        documentHelper.render
           component: views.edit({model})
 
 module.exports = usersRouter

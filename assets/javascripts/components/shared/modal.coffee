@@ -8,7 +8,6 @@
 
 React          = require("react")
 R              = React.DOM
-DocumentHelper = require("../../lib/document-helper")
 _              = require("underscore")
 
 Modal = React.createClass

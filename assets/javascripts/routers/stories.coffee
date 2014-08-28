@@ -1,7 +1,7 @@
 AmpersandRouter = require("ampersand-router/ampersand-router")
 
 react          = require("react")
-DocumentHelper = require("../lib/document-helper")
+documentHelper = require("../lib/document-helper")
 
 Story          = require("../models/story")
 Stories        = require("../collections/stories")
@@ -23,9 +23,9 @@ StoriesRouter = AmpersandRouter.extend
 
     stories.fetch
       success: (collection) ->
-        DocumentHelper.title = "(#{collection.length}) Stories"
+        documentHelper.title = "(#{collection.length}) Stories"
 
-        DocumentHelper.render
+        documentHelper.render
           component: views.index({collection})
 
   show: (id) ->
@@ -33,21 +33,21 @@ StoriesRouter = AmpersandRouter.extend
 
     story.fetch
       success: (model) ->
-        DocumentHelper.render
+        documentHelper.render
           component: views.show(story: model)
 
   new: ->
     story = new Story()
     story.save {body: "hello!"},
       success: (model) ->
-        DocumentHelper.navigate("/stories/#{model.id}/edit", true)
+        documentHelper.navigate("/stories/#{model.id}/edit", true)
 
   edit: (id) ->
     story = new Story({id})
 
     story.fetch
       success: (model) ->
-        DocumentHelper.render
+        documentHelper.render
           component: views.edit({model})
 
 module.exports = StoriesRouter
