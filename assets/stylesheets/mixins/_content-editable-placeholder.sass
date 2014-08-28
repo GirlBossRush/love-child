@@ -1,0 +1,5 @@
+@mixin content-editable-placeholder
+  &:empty:not(:focus):before
+    content: attr(data-placeholder)
+    color: $gray-light
+    cursor: text

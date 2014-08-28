@@ -21,10 +21,12 @@ StoryEditor = React.createClass
           className: "title"
           onInput: @handleContentUpdate
           contentEditable: true
+          "data-placeholder": "Title"
           ref: "title"
 
         R.div
           className: "description",
+          "data-placeholder": "Description"
           onInput: @handleContentUpdate,
           contentEditable: true
           ref: "description"
@@ -35,6 +37,7 @@ StoryEditor = React.createClass
 
       R.article
         className: "body"
+        "data-placeholder": "Your story begins..."
         ref: "body"
         contentEditable: true
         onInput: @handleContentUpdate
