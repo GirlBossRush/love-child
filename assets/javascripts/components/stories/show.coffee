@@ -20,7 +20,7 @@ module.exports = React.createClass
         ]
 
       R.header {className: "headline"},
-        R.div {className: "title", ref: "title"}, @props.story.title
+        R.div {className: "title", ref: "title", "data-placeholder": "untitled"}, @props.story.title
         R.div {className: "description"}, @props.story.description
         R.div {className: "author"}, @props.story.author
         humanTime {datetime: @props.story.updated_at}

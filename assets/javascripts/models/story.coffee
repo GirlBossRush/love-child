@@ -15,7 +15,4 @@ Story = AmpersandModel.extend
 
   urlRoot: pathHelper.api("stories")
 
-  defaults:
-    title: "Title"
-
 module.exports = Story
