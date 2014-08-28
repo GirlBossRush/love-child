@@ -1,11 +1,11 @@
-React               = require("react")
-R                   = React.DOM
-humanTime           = require("../shared/human-time")
-estimateReadingTime = require("../shared/estimate-reading-time")
-documentHelper      = require("../../lib/document-helper")
-userPreferences     = require("../users/preferences")
-viewControls        = require("./shared/view-controls")
-fullscreenToggle    = require("./shared/view-controls/fullscreen-toggle")
+React                = require("react")
+R                    = React.DOM
+humanTime            = require("../shared/human-time")
+estimatedReadingTime = require("../shared/estimated-reading-time")
+documentHelper       = require("../../lib/document-helper")
+userPreferences      = require("../users/preferences")
+viewControls         = require("./shared/view-controls")
+fullscreenToggle     = require("./shared/view-controls/fullscreen-toggle")
 
 module.exports = React.createClass
   displayName: "story"
@@ -14,6 +14,7 @@ module.exports = React.createClass
     R.section {className: "story"},
       viewControls
         primaryControls: [
+          estimatedReadingTime.bind(this, words: @state.bodyText)
           fullscreenToggle
         ]
 
@@ -22,7 +23,6 @@ module.exports = React.createClass
         R.div {className: "description"}, @props.story.description
         R.div {className: "author"}, @props.story.author
         humanTime {datetime: @props.story.updated_at}
-        estimateReadingTime {words: @state.bodyText}
         R.hr {className: "section-seperator"}
 
       R.article

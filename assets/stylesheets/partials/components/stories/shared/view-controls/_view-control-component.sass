@@ -1,0 +1,16 @@
+@mixin view-control-component
+  +user-select(none)
+  display: inline-block
+  vertical-align: middle
+
+  text-transform: lowercase
+  font-variant: small-caps
+  font-family: $font-family-accent
+  color: $gray-light
+
+  cursor: default
+
+  transition: color 100ms linear
+
+  &:hover
+    color: $text-color

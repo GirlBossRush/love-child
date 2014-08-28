@@ -1,14 +1,15 @@
-React            = require("react")
-R                = React.DOM
-documentHelper   = require("../../lib/document-helper")
-userPreferences  = require("../users/preferences")
-humanTime        = require("../shared/human-time")
-validations      = require("./shared/validations")
-viewControls     = require("./shared/view-controls")
-savedState       = require("./shared/view-controls/saved-state")
-fullscreenToggle = require("./shared/view-controls/fullscreen-toggle")
-_                = require("underscore")
-MediumEditor     = require("medium-editor")
+React                = require("react")
+R                    = React.DOM
+documentHelper       = require("../../lib/document-helper")
+userPreferences      = require("../users/preferences")
+humanTime            = require("../shared/human-time")
+estimatedReadingTime = require("../shared/estimated-reading-time")
+validations          = require("./shared/validations")
+viewControls         = require("./shared/view-controls")
+savedState           = require("./shared/view-controls/saved-state")
+fullscreenToggle     = require("./shared/view-controls/fullscreen-toggle")
+_                    = require("underscore")
+MediumEditor         = require("medium-editor")
 
 
 UPDATE_THROTTLE = 1500
@@ -25,6 +26,8 @@ StoryEditor = React.createClass
             isSaving: @state.isSaving
             isSaved: @state.isSaved
 
+          estimatedReadingTime.bind(this, words: @state.bodyText)
+
           fullscreenToggle
         ]
 
@@ -32,7 +35,7 @@ StoryEditor = React.createClass
         R.div
           ref: "title"
           className: "title"
-          onInput: @handleContentUpdate
+          onInput: @handleContentChange
           contentEditable: true
           "data-placeholder": "Title"
 
@@ -40,7 +43,7 @@ StoryEditor = React.createClass
           ref: "description"
           className: "description",
           "data-placeholder": "Description"
-          onInput: @handleContentUpdate,
+          onInput: @handleContentChange,
           contentEditable: true
 
         R.div {className: "author"}, @state.story.author
@@ -54,7 +57,7 @@ StoryEditor = React.createClass
         "data-font-size": @state.paragraphFontSize
         "data-placeholder": "Your story begins..."
         contentEditable: true
-        onInput: @handleContentUpdate
+        onInput: @handleContentChange
 
       R.footer {className: "summary"}
 
@@ -80,14 +83,19 @@ StoryEditor = React.createClass
 
   , UPDATE_THROTTLE
 
-  handleContentUpdate: (e) ->
+  handleContentChange: (e) ->
     if !@state.isSaving
       @state.isSaved = false
+
       @forceUpdate()
 
       @updateContentEditableFields()
 
       @saveStory()
+
+  componentWillUpdate: ->
+    body            = @refs.body.getDOMNode()
+    @state.bodyText = body.textContent
 
   componentDidUpdate: ->
     @setTitle()
@@ -115,6 +123,8 @@ StoryEditor = React.createClass
     for field in contentEditableFields
       @refs[field].getDOMNode().innerHTML = @state.story[field]
 
+    @forceUpdate()
+
   updateContentEditableFields: ->
     # Fetch data from DOM, update model attributes.
     for field in contentEditableFields
@@ -131,5 +141,6 @@ StoryEditor = React.createClass
 
     model: @props.model
     story: @props.model
+    bodyText: ""
 
 module.exports = StoryEditor
