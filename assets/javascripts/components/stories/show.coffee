@@ -13,7 +13,7 @@ module.exports = React.createClass
       viewControls(@props.story)
 
       R.header {className: "headline"},
-        R.div {className: "title"}, @props.story.title
+        R.div {className: "title", ref: "title"}, @props.story.title
         R.div {className: "description"}, @props.story.description
         R.div {className: "author"}, @props.story.author
         humanTime {datetime: @props.story.updated_at}
@@ -35,6 +35,10 @@ module.exports = React.createClass
     body            = @refs.body.getDOMNode()
     @state.bodyText = body.textContent
     @forceUpdate()
+
+  componentDidUpdate: ->
+    title = @props.story.title.replace("&nbsp;", "")
+    DocumentHelper.title = [title, "Stories"]
 
   getInitialState: ->
     paragraphFontSize: "default"

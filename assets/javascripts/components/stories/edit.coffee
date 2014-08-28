@@ -1,13 +1,13 @@
-React                  = require("react")
-R                      = React.DOM
-humanTime              = require("../shared/human-time")
-_                      = require("underscore")
-
-MediumEditor = require("medium-editor")
+React          = require("react")
+R              = React.DOM
+DocumentHelper = require("../../lib/document-helper")
+humanTime      = require("../shared/human-time")
+validations    = require("./shared/validations")
+_              = require("underscore")
+MediumEditor   = require("medium-editor")
 
 UPDATE_THROTTLE = 1500
 contentEditableFields = ["title", "description", "body"]
-
 
 StoryEditor = React.createClass
   displayName: "storyEdit"
@@ -88,8 +88,15 @@ StoryEditor = React.createClass
 
       @saveStory()
 
+  componentDidUpdate: ->
+    title = @state.story.title.replace("&nbsp;", "")
+    DocumentHelper.title = ["Edit", title, "Stories"]
+
   componentDidMount: ->
     @populateContentEditableFields()
+
+    title = @refs.title.getDOMNode()
+    validations.title.init(title)
 
     body = @refs.body.getDOMNode()
 

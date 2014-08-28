@@ -33,8 +33,6 @@ StoriesRouter = AmpersandRouter.extend
 
     story.fetch
       success: (model) ->
-        DocumentHelper.title = [model.attributes.title, "Stories"]
-
         DocumentHelper.render
           component: views.show(story: model)
 
@@ -49,8 +47,6 @@ StoriesRouter = AmpersandRouter.extend
 
     story.fetch
       success: (model) ->
-        DocumentHelper.title = ["Edit", model.attributes.title, "Stories"]
-
         DocumentHelper.render
           component: views.edit({model})
 
