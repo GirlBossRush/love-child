@@ -32,39 +32,37 @@ documentHelper =
     else
       throw new Exceptions.UnknownAnchor(options.anchor)
 
-# Treat the document title like a property.
-Object.defineProperty documentHelper, "title",
-  # Use base title if no prefix is provided. Arrays will be split and delimited.
-  set: (value) ->
-    base = meta.title
+Object.defineProperties documentHelper,
+  # Treat the document title like a property.
+  title:
+    set: (value) ->
+      # Use base title if no prefix is provided. Arrays will be split and delimited.
+      base = meta.title
 
-    title = if value?
-      if $.isArray(value)
-        prefixes = ""
+      title = if value?
+        if Array.isArray(value)
+          prefixes = ""
 
-        for subTitle in value
-          prefixes += "#{subTitle} - "
-
-        "#{prefixes}#{base}"
+          value.join(" - ") + " - #{base}"
+        else
+          "#{value} - #{base}"
       else
-        "#{value} - #{base}"
-    else
-      base
+        base
 
-    d.title = title
+      d.title = title
 
-  get: ->
-    d.title
+    get: ->
+      d.title
 
-# Abstract fullscreen API.
-Object.defineProperty documentHelper, "fullscreen",
-  set: (enabled) ->
-    if enabled
-      d.documentElement.requestFullscreen()
-    else
-      d.exitFullscreen()
+  # Abstract fullscreen API.
+  fullscreen:
+    set: (enabled) ->
+      if enabled
+        d.documentElement.requestFullscreen()
+      else
+        d.exitFullscreen()
 
-  get: ->
-    !!document.fullscreenElement
+    get: ->
+      !!document.fullscreenElement
 
 module.exports = documentHelper
