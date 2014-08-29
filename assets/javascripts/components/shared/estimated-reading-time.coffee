@@ -57,4 +57,7 @@ module.exports = React.createClass
     # The throttled function must be in a callback because React isn't detecting
     # that an update should be made.
     $(window).scroll ->
+
       throttledUpdate()
+  componentWillUnmount: ->
+    $(window).unbind("scroll")
