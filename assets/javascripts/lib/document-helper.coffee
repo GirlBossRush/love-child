@@ -2,17 +2,19 @@
 
 History            = require("ampersand-router/ampersand-history")
 _                  = require("underscore")
+Internuncio        = require("internuncio")
 React              = require("react")
 config             = require("../../../config/application")
 meta               = require("../../../config/meta-attributes")
 Exceptions         = require("./document-helper/exceptions")
 fullscreenPolyfill = require("./document-helper/fullscreen-polyfill")
-d                  = document
 
+d      = document
+logger = new Internuncio("DocumentHelper")
 
 documentHelper =
   navigate: (path) ->
-    console.log("Navigate: #{path}")
+    logger.log("Navigate: #{path}")
     History.navigate.apply(History, arguments)
 
   # Components should only be rendered out to an anchor listed here.
