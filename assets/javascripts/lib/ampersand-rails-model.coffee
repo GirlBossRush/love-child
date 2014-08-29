@@ -1,19 +1,30 @@
-AmpersandModel = require("ampersand-model/ampersand-model")
-sync           = require("ampersand-sync")
-_              = require("underscore")
+AmpersandModel     = require("ampersand-model")
+_                  = require("underscore")
+ContentPlaceholder = require("../components/shared/content-placeholder")
+documentHelper     = require("./document-helper")
+sync               = AmpersandModel.prototype.sync
+fetch              = AmpersandModel.prototype.fetch
 
-AmpersandModel.prototype.toJSON = ->
-  attributes = {}
+module.exports = AmpersandModel.extend
+  toJSON: ->
+    attributes = {}
 
-  attributes[@name] = @serialize()
+    attributes[@name] = @serialize()
 
-  return attributes
+    return attributes
 
-AmpersandModel.prototype.sync = (method, model, options) ->
-  if _.contains(["update", "create", "delete"], method)
-    options.xhrFields =
-      withCredentials: true
+  sync: (method, model, options) ->
+    if _.contains(["update", "create", "delete"], method)
+      options.xhrFields =
+        withCredentials: true
 
-  sync.call(this, method, model, options)
+    sync.call(this, method, model, options)
 
-module.exports = AmpersandModel
+  fetch: (options = {}) ->
+    _.defaults options,
+      preloadContent: ContentPlaceholder
+
+    # Show a given component while fetching content.
+    documentHelper.render(component: options.preloadContent())
+
+    fetch.call(this, options)
