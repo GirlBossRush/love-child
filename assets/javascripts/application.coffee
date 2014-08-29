@@ -1,5 +1,6 @@
-#= require modernizr/modernizr
-#= require bootstrap
+# Necessary for some plugins.
+window.$ = window.jQuery = require("jquery")
+require("./lib/bootstrap-adapter")
 
 documentHelper    = require("./lib/document-helper")
 
@@ -10,9 +11,6 @@ History           = require("ampersand-router/ampersand-history")
 
 SideMenu          = require("./components/shared/side-menu")
 navigationItems   = require("./components/shared/side-menu/navigation-items")
-
-# Necessary for some plugins.
-window.$ = require("jquery")
 
 $ ->
   document.documentElement.classList.remove("no-js")
