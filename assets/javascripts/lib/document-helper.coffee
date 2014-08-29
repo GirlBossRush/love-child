@@ -11,8 +11,9 @@ d                  = document
 
 
 documentHelper =
-  # Sugar.
-  navigate: History.navigate.bind(History)
+  navigate: (path) ->
+    console.log("Navigate: #{path}")
+    History.navigate.apply(History, arguments)
 
   # Components should only be rendered out to an anchor listed here.
   anchors:
