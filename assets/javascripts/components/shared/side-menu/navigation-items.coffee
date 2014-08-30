@@ -2,36 +2,36 @@ module.exports = [
   {
     label: "Home"
     icon: "home"
-    path: "/"
+    path: "root"
   }
 
   {
     label: "Stories"
     icon: "list-alt"
-    path: "/stories"
+    path: "stories"
   }
 
   {
     label: "Search"
     icon: "search"
-    path: "/stories/search"
+    path: "root"
   }
 
   {
     label: "Create"
     icon: "file"
-    path: "/stories/new"
+    path: "stories-new"
   }
 
   {
     label: "Settings"
     icon: "wrench"
-    path: "/settings"
+    path: "root"
   }
 
   {
     label: "Library"
     icon: "book"
-    path: "/library"
+    path: "root"
   }
 ]

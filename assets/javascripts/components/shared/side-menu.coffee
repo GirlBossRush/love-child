@@ -4,20 +4,19 @@
 
 React          = require("react")
 R              = React.DOM
+Link           = require("react-router/link")
 documentHelper = require("../../lib/document-helper")
 
 module.exports = React.createClass
   displayName: "sideMenu"
 
-  navigate: (path) ->
-    documentHelper.navigate(path, true)
-
-  navigationItem: (item) ->
-    R.li {className: "list-group-item", key: item.path, onClick: @navigate.bind(this, item.path)},
+  navigationItem: (item, key) ->
+    Link {to: item.path, params: {}, className: "list-group-item", key},
       R.span {className: "item-label"}, item.label
       R.span {className: "accent glyphicon glyphicon-#{item.icon}"}, ""
 
   render: ->
     R.div {className: "menu-content no-print"},
-      R.ul {className: "list-group"},
-        @props.navigationItems.map(@navigationItem)
+      R.div {className: "list-group"},
+        for item, i in @props.navigationItems
+          @navigationItem(item, i)

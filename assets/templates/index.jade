@@ -12,6 +12,7 @@ html.no-js(lang="en-US")
     script(src="//use.typekit.net/pxi7oym.js")
     script.
       try{Typekit.load();}catch(e){}
+    script(src="#{pathHelper.asset('application.js')}")
 
     link(rel="stylesheet" type="text/css" href="#{pathHelper.asset('application.css')}")
     link(rel="shortcut icon" href="#{pathHelper.asset('foundation/glyph-logo-small.png')}")
@@ -32,12 +33,3 @@ html.no-js(lang="en-US")
     noscript
       | Please enable Javascript.
       a href="http://enable-javascript.com" http://enable-javascript.com
-
-    #above-content
-    .mask
-
-    aside#aside-content
-
-    main#main-content.container
-
-    script(src="#{pathHelper.asset('application.js')}")

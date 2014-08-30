@@ -1,4 +1,4 @@
-AmpersandRestCollection = require("../lib/ampersand-rest-react-collection")
+AmpersandRestCollection = require("ampersand-rest-collection")
 User                    = require("../models/user")
 pathHelper              = require("../../../util/path-helper")
 

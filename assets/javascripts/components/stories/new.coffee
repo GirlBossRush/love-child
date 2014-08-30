@@ -1,33 +1,25 @@
 React              = require("react")
 R                  = React.DOM
+Router             = require("react-router")
 AsyncState         = require("react-router/AsyncState")
 Story              = require("../../models/story")
-documentHelper     = require("../../lib/document-helper")
-View               = require("./shared/story-editor")
 ContentPlaceholder = require("../shared/content-placeholder")
 
 module.exports = React.createClass
-  displayName: "story-edit"
+  displayName: "story-new"
   mixins: [AsyncState]
 
   statics:
     getInitialAsyncState: (params, query, setState) ->
-      new Story(id: params.id).fetch
+      new Story().save {},
         success: (model) ->
           setState(story: model)
 
   render: ->
     if @state.story
-      View(story: @state.story)
-    else
-      ContentPlaceholder()
-
-  componentDidUpdate: ->
-    @setTitle()
+      Router.transitionTo("story-edit", {id: @state.story.id})
+    ContentPlaceholder()
 
   getInitialState: ->
     story: null
 
-  setTitle: ->
-    title = @state.story.title?.replace("&nbsp;", "") or "untitled"
-    documentHelper.title = ["Editing #{title}"]

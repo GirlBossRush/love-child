@@ -19,12 +19,3 @@ module.exports = AmpersandModel.extend
         withCredentials: true
 
     sync.call(this, method, model, options)
-
-  fetch: (options = {}) ->
-    _.defaults options,
-      preloadContent: ContentPlaceholder
-
-    # Show a given component while fetching content.
-    documentHelper.render(component: options.preloadContent())
-
-    fetch.call(this, options)

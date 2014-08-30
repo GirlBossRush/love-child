@@ -6,9 +6,10 @@ ErrorPage = React.createClass
   displayName: "errorPage"
 
   render: ->
+    message = @props.message or "'#{@props.params.splat}' is invalid."
     R.div {className: "error-page", "data-code": @props.code},
       R.h1 null, @props.code
-      R.p null, "'#{@props.path}' is invalid."
+      R.p null, message
 
   componentDidMount: ->
     documentHelper.title = "#{@props.code} - Error"

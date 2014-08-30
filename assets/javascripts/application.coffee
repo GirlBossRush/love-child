@@ -1,25 +1,35 @@
+document.documentElement.classList.remove("no-js")
+
 # Necessary for some plugins.
 window.$ = window.jQuery = require("jquery")
 require("./lib/bootstrap-adapter")
 
-documentHelper    = require("./lib/document-helper")
+React         = require("react")
+Routes        = require("react-router/routes")
+Route         = require("react-router/route")
+NotFoundRoute = require("react-router/notFoundRoute")
+DefaultRoute  = require("react-router/defaultRoute")
 
-ApplicationRouter = require("./routers/application")
-StoriesRouter     = require("./routers/stories")
-UsersRouter       = require("./routers/users")
-History           = require("ampersand-router/ampersand-history")
+Application   = require("./components/application")
+Stories       = require("./components/stories")
+ErrorPage     = require("./components/errors/error-page")
 
-SideMenu          = require("./components/shared/side-menu")
-navigationItems   = require("./components/shared/side-menu/navigation-items")
+stories =
+  index: require("./components/stories/index")
+  show:  require("./components/stories/show")
+  edit:  require("./components/stories/edit")
+  new:   require("./components/stories/new")
 
+routes = Routes {location: "history"},
+  Route {name: "root", path: "/", handler: Application},
+    DefaultRoute {handler: ErrorPage, code: 204, message: "Alternative Fiction"}
+
+    Route {name: "stories", handler: Stories},
+      DefaultRoute {handler: stories.index}
+      Route {name: "stories-new", path: "new", handler: stories.new}
+      Route {name: "story", path: ":id", handler: stories.show}
+      Route {name: "story-edit", path: ":id/edit", handler: stories.edit}
+
+  NotFoundRoute {name: "not-found", handler: ErrorPage, code: 404}
 $ ->
-  document.documentElement.classList.remove("no-js")
-  new ApplicationRouter()
-  new StoriesRouter()
-  new UsersRouter()
-
-  History.start(pushState: true)
-
-  documentHelper.render
-    component: SideMenu({navigationItems})
-    anchor: "asideContent"
+  React.renderComponent(routes, document.body)
