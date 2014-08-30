@@ -39,7 +39,6 @@ usersRouter = AmpersandRouter.extend
 
   new: ->
     user = new User()
-    user.save {body: "hello!"},
       success: (model) ->
         documentHelper.navigate("/users/#{model.id}/edit", true)
 
