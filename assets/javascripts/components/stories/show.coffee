@@ -2,8 +2,8 @@ React              = require("react")
 R                  = React.DOM
 Firebase           = require("firebase")
 ReactFireMixin     = require("reactfire")
-apiPath            = require("../../../../util/path-helper").api
 documentHelper     = require("../../lib/document-helper")
+apiPath            = require("../../lib/path-helper").api
 View               = require("./shared/story")
 ContentPlaceholder = require("../shared/content-placeholder")
 

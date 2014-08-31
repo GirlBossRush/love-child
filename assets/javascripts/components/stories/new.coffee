@@ -3,8 +3,7 @@ R                  = React.DOM
 Router             = require("react-router")
 Firebase           = require("firebase")
 ReactFireMixin     = require("reactfire")
-pathHelper         = require("../../../../util/path-helper")
-apiPath            = require("../../../../util/path-helper").api
+apiPath            = require("../../lib/path-helper").api
 ContentPlaceholder = require("../shared/content-placeholder")
 
 module.exports = React.createClass

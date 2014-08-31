@@ -1,5 +1,5 @@
 # REFACTOR: Haven't yet found a clean way to pull these variables in.
-config = require("../config/application")
+config = require("../../../config/application")
 
 if window?
   # Running within browser.
