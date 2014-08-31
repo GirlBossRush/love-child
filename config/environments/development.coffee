@@ -1,4 +1,4 @@
 module.exports =
-  APP_BASE: "localhost:3000"
+  APP_BASE: "http://localhost:3000"
 
-  API_BASE: "localhost:3001"
+  API_BASE: "https://af-dev.firebaseio.com"

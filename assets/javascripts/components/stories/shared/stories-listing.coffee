@@ -2,13 +2,15 @@
 # Arguments:
 # * Stories: Backbone Collection.
 
-documentHelper = require("../../../lib/document-helper")
 React          = require("react")
 R              = React.DOM
 Link           = require("react-router/link")
 
 HumanTime      = require("../../shared/human-time")
 Modal          = require("../../shared/modal")
+
+Internuncio    = require("internuncio")
+logger         = new Internuncio("Story Listing")
 
 StoryList = React.createClass
   displayName: "stories-listing"
@@ -21,20 +23,22 @@ StoryList = React.createClass
         R.th {className: "description"}, "Description"
         R.th {className: "created-at"}, "Created At"
         R.th {className: "delete-story"}, "Delete"
-      R.tbody null, @props.stories.map(@rowRender)
+      R.tbody null,
+        for id, story of @props.stories
+          @rowRender(id, story)
 
-  rowRender: (story) ->
-    R.tr {"data-id": story.id, key: story.id},
-      R.td {className: "id"}, story.id
+  rowRender: (id, story) ->
+    R.tr {"data-id": id, key: id},
+      R.td {className: "id"}, id
       R.td {className: "title"},
-        Link {to: "story", params: {id: story.id}}, story.title or "untitled"
-        Link {to: "story-edit", params: {id: story.id}}, "(edit)"
+        Link {to: "story", params: {id: id}}, story.title or "untitled"
+        Link {to: "story-edit", params: {id: id}}, "(edit)"
       R.td {className: "description"}, story.description
       R.td {className: "created-at"},
-        HumanTime(datetime: story.created_at)
-      R.td {className: "link delete-story", onClick: @confirmDeleteRender.bind(this, story)}, "Delete"
+        HumanTime(datetime: story.createdAt)
+      R.td {className: "link delete-story", onClick: @confirmDeleteRender.bind(this, id, story)}, "Delete"
 
-  confirmDeleteRender: (story) ->
+  confirmDeleteRender: (id, story) ->
     confirmationModal = Modal
       title: "Confirm Deletion"
       type: "warning"
@@ -48,7 +52,7 @@ StoryList = React.createClass
         R.span {
           className: "btn dark btn-danger"
           key: "delete"
-          onClick: @delete.bind(this, story.id)
+          onClick: @delete.bind(this, id)
           "data-dismiss": "modal"
         }, "Yes"
 
@@ -62,11 +66,15 @@ StoryList = React.createClass
     React.renderComponent confirmationModal, document.querySelector("#above-content")
 
   delete: (id) ->
-    model = @props.stories.get(id)
-    model.destroy
-      success: (model) =>
-        @props.stories.remove(model)
-        @forceUpdate()
+    # debugger
+    storyRef = @props.storiesRef.child(id)
+    storyRef.remove (error) =>
+      if error
+        logger.error(error)
+      else
         @props.onChange()
+      # success: (model) =>
+      #   @props.stories.remove(model)
+      #   @forceUpdate()
 
 module.exports = StoryList

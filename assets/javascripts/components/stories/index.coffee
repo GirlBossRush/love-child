@@ -1,24 +1,20 @@
 React              = require("react")
 R                  = React.DOM
-AsyncState         = require("react-router/AsyncState")
-Stories            = require("../../collections/stories")
+Firebase           = require("firebase")
+ReactFireMixin     = require("reactfire")
 documentHelper     = require("../../lib/document-helper")
+apiPath            = require("../../../../util/path-helper").api
 View               = require("./shared/stories-listing")
 ContentPlaceholder = require("../shared/content-placeholder")
+_                  = require("underscore")
 
 module.exports = React.createClass
   displayName: "story-index"
-  mixins: [AsyncState]
-
-  statics:
-    getInitialAsyncState: (params, query, setState) ->
-      new Stories().fetch
-        success: (collection) ->
-          setState(stories: collection)
+  mixins: [ReactFireMixin]
 
   render: ->
     if @state.stories
-      View(stories: @state.stories, onChange: @handleChange)
+      View(storiesRef: @storiesRef, stories: @state.stories, onChange: @handleChange)
     else
       ContentPlaceholder()
 
@@ -28,8 +24,12 @@ module.exports = React.createClass
   componentDidUpdate: ->
     @setTitle()
 
+  componentWillMount: ->
+    @storiesRef = new Firebase(apiPath("stories"))
+    @bindAsObject(@storiesRef.limit(100), "stories")
+
   getInitialState: ->
     stories: null
 
   setTitle: ->
-    documentHelper.title = "(#{@state.stories.length}) Stories"
+    documentHelper.title = "(#{_.size(@state.stories)}) Stories"

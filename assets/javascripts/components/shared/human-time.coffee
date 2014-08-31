@@ -1,6 +1,6 @@
 # Humanized timestamp component.
 # Arguments:
-# * datetime: ISO 8601 datetime String.
+# * datetime: UTC (Unix Epoch)
 
 REFRESH_DELAY = 1000
 
@@ -27,7 +27,11 @@ HumanTime = React.createClass
     @setState relativeTime: @humanize(@props.datetime)
 
   render: ->
-    R.time {className: "human-time", dateTime: @props.datetime, title: @props.datetime},
+    ISOFormatted = undefined
+    # Component may be rendered before data is ready.
+    ISOFormatted = new Date(@props.datetime).toISOString() if @props.datetime
+
+    R.time {className: "human-time", dateTime: @props.datetime, title: ISOFormatted},
       @state.relativeTime
 
 module.exports = HumanTime

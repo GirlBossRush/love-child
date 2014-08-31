@@ -3,14 +3,18 @@ R                    = React.DOM
 _                    = require("underscore")
 MediumEditor         = require("medium-editor")
 htmlToText           = require("html-to-text")
+
 userPreferences      = require("../../users/preferences")
 humanTime            = require("../../shared/human-time")
 estimatedReadingTime = require("../../shared/estimated-reading-time")
 validations          = require("./validations")
+
 viewControls         = require("./view-controls")
 savedState           = require("./view-controls/saved-state")
 fullscreenToggle     = require("./view-controls/fullscreen-toggle")
 
+Internuncio          = require("internuncio")
+logger               = new Internuncio("Story Listing")
 
 
 UPDATE_THROTTLE = 1500
@@ -48,7 +52,7 @@ StoryEditor = React.createClass
           contentEditable: true
 
         R.div {className: "author"}, @state.story.author
-        humanTime {datetime: @state.story.updated_at}
+        humanTime {datetime: @state.story.updatedAt}
         R.hr {className: "section-seperator"}
 
       R.article
@@ -63,28 +67,28 @@ StoryEditor = React.createClass
       R.footer {className: "summary"}
 
   saveStory: _.debounce ->
-    model = @state.model
-    model.set(@state.story)
-
     @state.isSaving = true
     @forceUpdate()
 
-    model.save @state.story,
-      success: =>
-        @state.isSaving = false
-        @state.isSaved  = true
-
-        @forceUpdate()
-
-      error: =>
+    @state.storyRef.transaction =>
+      _.extend {}, @state.story, {updatedAt: Firebase.ServerValue.TIMESTAMP}
+    , (error, committed, snapshot) =>
+      if error
+        logger.error(error)
         @state.isSaving = false
         @state.isSaved  = false
 
-        @forceUpdate()
+      else
+        @state.isSaving = false
+        @state.isSaved  = true
+        @state.story = snapshot.val()
+
+      @forceUpdate()
 
   , UPDATE_THROTTLE
 
   handleContentChange: (e) ->
+    # Prevent attempting to save while a transaction is processing.
     if !@state.isSaving
       @state.isSaved = false
 
@@ -127,9 +131,9 @@ StoryEditor = React.createClass
     isSaving: false
     isSaved: true
 
-    bodyCaretPosition: 0
-
-    model: @props.story
+    # Remote model reference.
+    storyRef: @props.storyRef
+    # Model used for editing.
     story: @props.story
 
 module.exports = StoryEditor
