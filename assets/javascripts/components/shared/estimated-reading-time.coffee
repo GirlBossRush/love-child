@@ -29,8 +29,7 @@ module.exports = React.createClass
     span {className: "estimated-reading-time"}, label
 
   estimateTimeByText: (text = "") ->
-    words     =  text
-    wordCount = size(words.match(/\s+/g))
+    wordCount = size(text.match(/\s+/g))
     minutes   = (wordCount / WORDS_PER_MINUTE) * (1 - @percentageRead())
 
     return {wordCount, minutes}
@@ -47,9 +46,6 @@ module.exports = React.createClass
     # Percentage will be higher than 1 if the window is scrolled beyond the element.
     return Math.min(scrollPercent, 1)
 
-  componentWillMount: ->
-    @estimateTimeByText()
-
   componentDidMount: ->
     throttledUpdate = debounce(@forceUpdate.bind(this), SCROLL_THROTTLE)
 
@@ -58,7 +54,7 @@ module.exports = React.createClass
     # The throttled function must be in a callback because React isn't detecting
     # that an update should be made.
     $(window).scroll ->
-
       throttledUpdate()
+
   componentWillUnmount: ->
     $(window).unbind("scroll")
