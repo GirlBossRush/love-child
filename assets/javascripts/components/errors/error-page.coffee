@@ -1,7 +1,7 @@
 React = require("react")
 {div, h1, p} = React.DOM
 
-documentHelper = require("../../lib/document-helper")
+title = require("../../helpers/title")
 
 ErrorPage = React.createClass
   displayName: "errorPage"
@@ -13,6 +13,6 @@ ErrorPage = React.createClass
       p null, message
 
   componentDidMount: ->
-    documentHelper.title = "#{@props.code} - Error"
+    document.title = title("#{@props.code} - Error")
 
 module.exports = ErrorPage

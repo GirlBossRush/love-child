@@ -2,7 +2,7 @@ gulp       = require("gulp")
 jade       = require("gulp-jade")
 config     = require("../../config/application")
 meta       = require("../../config/meta-attributes")
-pathHelper = require("../../assets/javascripts/lib/path-helper")
+pathHelper = require("../../assets/javascripts/helpers/path")
 
 options =
   pretty: config.ENVIRONMENT is "development"

@@ -1,16 +1,16 @@
-keyMap = require("../../../lib/key-map")
-_      = require("underscore")
+key        = require("../../../lib/key-map")
+{contains} = require("underscore")
 
 module.exports =
   title:
     maxlength: 100
     editKeys: [
-      keyMap.backspace
-      keyMap.delete
-      keyMap.up_arrow
-      keyMap.right_arrow
-      keyMap.down_arrow
-      keyMap.left_arrow
+      key.backspace
+      key.delete
+      key.up_arrow
+      key.right_arrow
+      key.down_arrow
+      key.left_arrow
     ]
 
     init: (title) ->
@@ -18,11 +18,11 @@ module.exports =
 
       # ---- Prevent newlines.
       title.addEventListener "keydown", (e) ->
-        if e.keyCode is keyMap.enter
+        if e.keyCode is key.enter
           e.preventDefault()
 
       # ---- Limit length.
       title.addEventListener "keydown", (e) ->
-        return if _.contains(self.editKeys, e.keyCode)
+        return if contains(self.editKeys, e.keyCode)
         if @textContent.length is self.maxlength
           e.preventDefault()

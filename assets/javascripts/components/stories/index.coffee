@@ -1,12 +1,14 @@
 React              = require("react")
-R                  = React.DOM
+
 Firebase           = require("firebase")
 ReactFireMixin     = require("reactfire")
-documentHelper     = require("../../lib/document-helper")
-apiPath            = require("../../lib/path-helper").api
+
+title              = require("../../helpers/title")
+{api}              = require("../../helpers/path")
+{size}             = require("underscore")
+
 View               = require("./shared/stories-listing")
 ContentPlaceholder = require("../shared/content-placeholder")
-_                  = require("underscore")
 
 module.exports = React.createClass
   displayName: "story-index"
@@ -25,11 +27,11 @@ module.exports = React.createClass
     @setTitle()
 
   componentWillMount: ->
-    @storiesRef = new Firebase(apiPath("stories"))
+    @storiesRef = new Firebase(api("stories"))
     @bindAsObject(@storiesRef.limit(100), "stories")
 
   getInitialState: ->
     stories: null
 
   setTitle: ->
-    documentHelper.title = "(#{_.size(@state.stories)}) Stories"
+    document.title = title("(#{size(@state.stories)}) Stories")

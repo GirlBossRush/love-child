@@ -8,7 +8,7 @@
 
 React = require("react")
 {header, footer, div, article, h5} = React.DOM
-_ = require("underscore")
+{uniqueId} = require("underscore")
 
 Modal = React.createClass
   displayName: "modal"
@@ -36,9 +36,9 @@ Modal = React.createClass
               div {className: "actions"}, @props.actions
 
   getInitialState: ->
-    id: _.uniqueId("modal")
-    type: @props.type || "info"
-    title: @props.title || "Information"
+    id: uniqueId("modal")
+    type: @props.type or "info"
+    title: @props.title or "Information"
 
   # REFACTOR: This is a bit odd since Bootstrap's interface is jQuery heavy.
   componentDidMount: ->

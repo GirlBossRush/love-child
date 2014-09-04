@@ -1,9 +1,11 @@
 React              = require("react")
-R                  = React.DOM
+
 Router             = require("react-router")
+
 Firebase           = require("firebase")
 ReactFireMixin     = require("reactfire")
-apiPath            = require("../../lib/path-helper").api
+
+{api}              = require("../../helpers/path")
 ContentPlaceholder = require("../shared/content-placeholder")
 
 module.exports = React.createClass
@@ -17,7 +19,7 @@ module.exports = React.createClass
     ContentPlaceholder()
 
   componentWillMount: ->
-    @storiesRef = new Firebase(apiPath("stories"))
+    @storiesRef = new Firebase(api("stories"))
     @storyRef = @storiesRef.push
       title: ""
       body: ""

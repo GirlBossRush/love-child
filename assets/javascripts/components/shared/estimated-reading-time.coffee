@@ -6,8 +6,8 @@
 React  = require("react")
 {span} = React.DOM
 
-moment = require("moment")
-_      = require("underscore")
+moment           = require("moment")
+{size, debounce} = require("underscore")
 
 WORDS_PER_MINUTE = 250
 SCROLL_THROTTLE  = 500
@@ -30,7 +30,7 @@ module.exports = React.createClass
 
   estimateTimeByText: (text = "") ->
     words     =  text
-    wordCount = _.size(words.match(/\s+/g))
+    wordCount = size(words.match(/\s+/g))
     minutes   = (wordCount / WORDS_PER_MINUTE) * (1 - @percentageRead())
 
     return {wordCount, minutes}
@@ -51,7 +51,7 @@ module.exports = React.createClass
     @estimateTimeByText()
 
   componentDidMount: ->
-    throttledUpdate = _.debounce(@forceUpdate.bind(this), SCROLL_THROTTLE)
+    throttledUpdate = debounce(@forceUpdate.bind(this), SCROLL_THROTTLE)
 
     # Calculating scroll position without jQuery is incredibly frustrating.
     # Each browser handles window scrolling dimensions differently.
