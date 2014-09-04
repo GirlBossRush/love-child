@@ -1,5 +1,3 @@
-document.documentElement.classList.remove("no-js")
-
 # Necessary for some plugins.
 window.$ = window.jQuery = require("jquery")
 require("./lib/bootstrap-adapter")

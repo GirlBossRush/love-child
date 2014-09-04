@@ -4,18 +4,21 @@ html.no-js(lang="en-US")
   head
     title= meta.title
 
-    script.
-      localStorage["ENVIRONMENT"] = "#{config.ENVIRONMENT}"
-      localStorage["APP_BASE"]    = "#{config.APP_BASE}"
-      localStorage["API_BASE"]    = "#{config.API_BASE}"
-
     script(src="//use.typekit.net/pxi7oym.js")
-    script.
-      try{Typekit.load();}catch(e){}
-    script(src="#{pathHelper.asset('application.js')}")
 
-    link(rel="stylesheet" type="text/css" href="#{pathHelper.asset('application.css')}")
-    link(rel="shortcut icon" href="#{pathHelper.asset('foundation/glyph-logo-small.png')}")
+    script.
+      try{Typekit.load();}catch(e){};
+
+      document.documentElement.classList.remove("no-js");
+
+      localStorage["ENVIRONMENT"] = "#{config.ENVIRONMENT}";
+      localStorage["APP_BASE"]    = "#{config.APP_BASE}";
+      localStorage["API_BASE"]    = "#{config.API_BASE}";
+
+    script(src="#{asset('application.js')}")
+
+    link(rel="stylesheet" type="text/css" href="#{asset('application.css')}")
+    link(rel="shortcut icon" href="#{asset('foundation/glyph-logo-small.png')}")
     link(rel="canonical" href="https://#{config.APP_BASE}")
 
     meta(charset="utf-8")
@@ -30,6 +33,15 @@ html.no-js(lang="en-US")
     meta(name="og:url" content="https://#{config.APP_BASE}")
 
   body(spellcheck=true)
-    noscript
-      | Please enable Javascript.
-      a href="http://enable-javascript.com" http://enable-javascript.com
+    noscript.no-js-info
+      h1 Alternative Fiction
+
+      p
+        i.glyphicon.glyphicon-warning-sign
+
+      p JavaScript is required to view this website.
+
+      p
+        a(href="http://enable-javascript.com" target="_blank")
+          | How to enable JavaScript.
+          sup.glyphicon.glyphicon-new-window
