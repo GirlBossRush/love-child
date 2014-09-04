@@ -1,14 +1,17 @@
-gulp         = require("gulp")
-ENVIRONMENT  = require("../../config/application").ENVIRONMENT
-source       = require("vinyl-source-stream")
-_            = require("underscore")
+gulp          = require("gulp")
+gulpif        = require("gulp-if")
 
-minifyify    = require("minifyify")
-browserify   = require("browserify")
-watchify     = require("watchify")
+source        = require("vinyl-source-stream")
+buffer        = require("vinyl-buffer")
+uglify        = require("gulp-uglify")
 
-bundleLogger = require("../util/bundleLogger")
-handleErrors = require("../util/handleErrors")
+browserify    = require("browserify")
+watchify      = require("watchify")
+bundleLogger  = require("../util/bundleLogger")
+handleErrors  = require("../util/handleErrors")
+
+{ENVIRONMENT} = require("../../config/application")
+isProduction  = ENVIRONMENT is "production"
 
 options =
   entries: ["./assets/javascripts/application.coffee"]
@@ -16,19 +19,11 @@ options =
   cache: {},
   packageCache: {},
 
-if ENVIRONMENT is "production"
-  # Required for Minifyify.
-  options.debug = true
-else
+unless isProduction
   # Required for Watchify.
   options.fullPaths = true
 
 b = browserify(options)
-
-b.plugin "minifyify",
-  map: "application.map.json"
-  output: "./build/assets/application.map.json"
-  minify: ENVIRONMENT is "production"
 
 bundleAndWatch = ->
   b = watchify(b)
@@ -43,6 +38,8 @@ bundleApp = (b) ->
     .on "error", handleErrors
     .on "end", bundleLogger.end
     .pipe(source("application.js"))
+    .pipe(gulpif(isProduction, buffer()))
+    .pipe(gulpif(isProduction, uglify()))
     .pipe(gulp.dest("./build/assets"))
 
 gulp.task "javascripts", ->
