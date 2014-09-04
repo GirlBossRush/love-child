@@ -5,10 +5,8 @@ window.$ = window.jQuery = require("jquery")
 require("./lib/bootstrap-adapter")
 
 React         = require("react")
-Routes        = require("react-router/routes")
-Route         = require("react-router/route")
-NotFoundRoute = require("react-router/notFoundRoute")
-DefaultRoute  = require("react-router/defaultRoute")
+Router        = require("react-router")
+{Routes, Route, NotFoundRoute, DefaultRoute} = require("react-router")
 
 Application   = require("./components/application")
 Stories       = require("./components/stories")

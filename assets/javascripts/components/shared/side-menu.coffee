@@ -4,7 +4,7 @@
 
 React          = require("react")
 R              = React.DOM
-Link           = require("react-router/link")
+{Link}         = require("react-router")
 documentHelper = require("../../lib/document-helper")
 
 module.exports = React.createClass
