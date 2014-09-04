@@ -21,7 +21,8 @@ StoryList = React.createClass
         th {className: "id"}, "ID"
         th {className: "title"}, "Title"
         th {className: "description"}, "Description"
-        th {className: "created-at"}, "Created At"
+        th {className: "updated-at"}, "Updated"
+        th {className: "created-at"}, "Created"
         th {className: "delete-story"}, "Delete"
       tbody null,
         for id, story of @props.stories
@@ -30,12 +31,19 @@ StoryList = React.createClass
   rowRender: (id, story) ->
     tr {"data-id": id, key: id},
       td {className: "id"}, id
+
       td {className: "title"},
         Link {to: "story", params: {id: id}}, story.title or "untitled"
         Link {to: "story-edit", params: {id: id}}, "(edit)"
+
       td {className: "description"}, story.description
+
+      td {className: "updated-at"},
+        HumanTime(datetime: story.updatedAt)
+
       td {className: "created-at"},
         HumanTime(datetime: story.createdAt)
+
       td {className: "link delete-story", onClick: @confirmDeleteRender.bind(this, id, story)}, "Delete"
 
   confirmDeleteRender: (id, story) ->
