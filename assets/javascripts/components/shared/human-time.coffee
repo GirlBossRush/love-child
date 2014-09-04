@@ -12,8 +12,12 @@ moment = require("moment")
 HumanTime = React.createClass
   displayName: "humantime"
 
-  getInitialState: ->
-    {relativeTime: @humanize(@props.datetime)}
+  render: ->
+    momentInstance = moment(@props.datetime)
+    ISOFormatted   = momentInstance.toISOString()
+
+    time {className: "human-time", dateTime: ISOFormatted, title: ISOFormatted},
+      momentInstance.fromNow()
 
   componentDidMount: ->
     @interval = setInterval(@refresh, REFRESH_DELAY)
@@ -21,18 +25,7 @@ HumanTime = React.createClass
   componentWillUnmount: ->
     clearInterval @interval
 
-  humanize: (datetime) ->
-    moment(datetime).fromNow()
-
   refresh: ->
-    @setState relativeTime: @humanize(@props.datetime)
-
-  render: ->
-    ISOFormatted = undefined
-    # Component may be rendered before data is ready.
-    ISOFormatted = new Date(@props.datetime).toISOString() if @props.datetime
-
-    time {className: "human-time", dateTime: @props.datetime, title: ISOFormatted},
-      @state.relativeTime
+    @forceUpdate()
 
 module.exports = HumanTime
