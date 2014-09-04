@@ -26,13 +26,11 @@ StoryEditor = React.createClass
     section {className: "story edit"},
       viewControls
         primaryControls: [
-          savedState.bind this,
-            isSaving: @state.isSaving
-            isSaved: @state.isSaved
+          savedState(isSaving: @state.isSaving, isSaved: @state.isSaved)
 
-          estimatedReadingTime.bind(this, textComponent: @refs.body, text: htmlToText.fromString(@state.story.body) )
+          estimatedReadingTime.bind(textComponent: @refs.body, text: htmlToText.fromString(@state.story.body) )
 
-          fullscreenToggle
+          fullscreenToggle()
         ]
 
       header {className: "headline"},

@@ -8,4 +8,4 @@ module.exports = React.createClass
     aside {className: "view-controls"},
       section {className: "primary-controls"},
         @props.primaryControls.map (component) ->
-          component()
+          component

@@ -15,8 +15,8 @@ module.exports = React.createClass
     section {className: "story"},
       viewControls
         primaryControls: [
-          estimatedReadingTime.bind(this, textComponent: @refs.body, text: htmlToText.fromString(@props.story.body) )
-          fullscreenToggle
+          estimatedReadingTime(textComponent: @refs.body, text: htmlToText.fromString(@props.story.body))
+          fullscreenToggle()
         ]
 
       header {className: "headline"},
