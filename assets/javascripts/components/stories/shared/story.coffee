@@ -36,6 +36,10 @@ module.exports = React.createClass
 
       footer {className: "summary"}
 
+  componentDidMount: ->
+    # Update body reference for estimated reading time.
+    @forceUpdate()
+
   getInitialState: ->
     paragraphFontSize: userPreferences.stories.fontSize
     paragraphWidth: userPreferences.stories.paragraphWidth
