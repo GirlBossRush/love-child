@@ -1,8 +1,10 @@
-React                = require("react")
-R                    = React.DOM
-_                    = require("underscore")
+React = require("react")
+{section, div, article, header, footer, hr} = React.DOM
+
+{extend, debounce}   = require("underscore")
 MediumEditor         = require("medium-editor")
 htmlToText           = require("html-to-text")
+Internuncio          = require("internuncio")
 
 userPreferences      = require("../../users/preferences")
 humanTime            = require("../../shared/human-time")
@@ -13,10 +15,7 @@ viewControls         = require("./view-controls")
 savedState           = require("./view-controls/saved-state")
 fullscreenToggle     = require("./view-controls/fullscreen-toggle")
 
-Internuncio          = require("internuncio")
-logger               = new Internuncio("Story Listing")
-
-
+logger = new Internuncio("Story Listing")
 UPDATE_THROTTLE = 1500
 contentEditableFields = ["title", "description", "body"]
 
@@ -24,7 +23,7 @@ StoryEditor = React.createClass
   displayName: "story-editor"
 
   render: ->
-    R.section {className: "story edit"},
+    section {className: "story edit"},
       viewControls
         primaryControls: [
           savedState.bind this,
@@ -36,26 +35,26 @@ StoryEditor = React.createClass
           fullscreenToggle
         ]
 
-      R.header {className: "headline"},
-        R.div
+      header {className: "headline"},
+        div
           ref: "title"
           className: "title"
           onInput: @handleContentChange
           contentEditable: true
           "data-placeholder": "Title"
 
-        R.div
+        div
           ref: "description"
           className: "description",
           "data-placeholder": "Description"
           onInput: @handleContentChange,
           contentEditable: true
 
-        R.div {className: "author"}, @state.story.author
+        div {className: "author"}, @state.story.author
         humanTime {datetime: @state.story.updatedAt}
-        R.hr {className: "section-seperator"}
+        hr {className: "section-seperator"}
 
-      R.article
+      article
         ref: "body"
         className: "body"
         "data-width": @state.paragraphWidth
@@ -64,14 +63,14 @@ StoryEditor = React.createClass
         contentEditable: true
         onInput: @handleContentChange
 
-      R.footer {className: "summary"}
+      footer {className: "summary"}
 
-  saveStory: _.debounce ->
+  saveStory: debounce ->
     @state.isSaving = true
     @forceUpdate()
 
     @state.storyRef.transaction =>
-      _.extend {}, @state.story, {updatedAt: Firebase.ServerValue.TIMESTAMP}
+      extend {}, @state.story, {updatedAt: Firebase.ServerValue.TIMESTAMP}
     , (error, committed, snapshot) =>
       if error
         logger.error(error)

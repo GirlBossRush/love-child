@@ -1,5 +1,6 @@
-React                = require("react")
-R                    = React.DOM
+React = require("react")
+{header, footer, section, article, div, hr} = React.DOM
+
 humanTime            = require("../../shared/human-time")
 estimatedReadingTime = require("../../shared/estimated-reading-time")
 userPreferences      = require("../../users/preferences")
@@ -11,21 +12,21 @@ module.exports = React.createClass
   displayName: "story"
 
   render: ->
-    R.section {className: "story"},
+    section {className: "story"},
       viewControls
         primaryControls: [
           estimatedReadingTime.bind(this, textComponent: @refs.body, text: htmlToText.fromString(@props.story.body) )
           fullscreenToggle
         ]
 
-      R.header {className: "headline"},
-        R.div {className: "title", ref: "title", "data-placeholder": "untitled"}, @props.story.title
-        R.div {className: "description"}, @props.story.description
-        R.div {className: "author"}, @props.story.author
+      header {className: "headline"},
+        div {className: "title", ref: "title", "data-placeholder": "untitled"}, @props.story.title
+        div {className: "description"}, @props.story.description
+        div {className: "author"}, @props.story.author
         humanTime {datetime: @props.story.updatedAt}
-        R.hr {className: "section-seperator"}
+        hr {className: "section-seperator"}
 
-      R.article
+      article
         ref: "body"
         className: "body"
         "data-width": @state.paragraphWidth
@@ -33,7 +34,7 @@ module.exports = React.createClass
         dangerouslySetInnerHTML:
           __html: @props.story.body
 
-      R.footer {className: "summary"}
+      footer {className: "summary"}
 
   getInitialState: ->
     paragraphFontSize: userPreferences.stories.fontSize

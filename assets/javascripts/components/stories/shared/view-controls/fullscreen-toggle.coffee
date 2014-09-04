@@ -1,7 +1,7 @@
 # Fullscreen toggle button.
 
-React          = require("react")
-R              = React.DOM
+React  = require("react")
+{span} = React.DOM
 documentHelper = require("../../../../lib/document-helper")
 
 module.exports = React.createClass
@@ -15,8 +15,8 @@ module.exports = React.createClass
       icon  = "remove"
       label = "Close"
 
-    R.span {className: "toggle-fullscreen no-print", onClick: @toggleFullscreen},
-      R.span {className: "glyphicon glyphicon-#{icon} toggle-icon", title: label}
+    span {className: "toggle-fullscreen no-print", onClick: @toggleFullscreen},
+      span {className: "glyphicon glyphicon-#{icon} toggle-icon", title: label}
 
   toggleFullscreen: ->
     documentHelper.fullscreen = !documentHelper.fullscreen

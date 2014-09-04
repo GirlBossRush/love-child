@@ -6,15 +6,15 @@
 # * Body: React DOM
 # * Actions: React DOM (Most likely an array).
 
-React          = require("react")
-R              = React.DOM
-_              = require("underscore")
+React = require("react")
+{header, footer, div, article, h5} = React.DOM
+_ = require("underscore")
 
 Modal = React.createClass
   displayName: "modal"
 
   render: ->
-    R.div {
+    div {
       className: "modal fade",
       key: @state.id,
       id: @state.id,
@@ -24,16 +24,16 @@ Modal = React.createClass
       "aria-hidden": "true"
     },
 
-      R.div {className: "modal-dialog modal-sm"},
-        R.div {className: "modal-inner"},
-          R.div {className: "modal-content"},
-            R.header {className: "modal-header"},
-              R.h5 {className: "modal-title #{@state.type}", id: @props.type}, @state.title
+      div {className: "modal-dialog modal-sm"},
+        div {className: "modal-inner"},
+          div {className: "modal-content"},
+            header {className: "modal-header"},
+              h5 {className: "modal-title #{@state.type}", id: @props.type}, @state.title
 
-            R.article {className: "modal-body"}, @props.body
+            article {className: "modal-body"}, @props.body
 
-            R.footer {className: "modal-footer"},
-              R.div {className: "actions"}, @props.actions
+            footer {className: "modal-footer"},
+              div {className: "actions"}, @props.actions
 
   getInitialState: ->
     id: _.uniqueId("modal")

@@ -2,41 +2,41 @@
 # Arguments:
 # * Stories: Backbone Collection.
 
-React          = require("react")
-R              = React.DOM
-{Link}         = require("react-router")
+React = require("react")
+{table, thead, th, tbody, tr, td, span, p} = React.DOM
 
-HumanTime      = require("../../shared/human-time")
-Modal          = require("../../shared/modal")
+{Link}    = require("react-router")
+HumanTime = require("../../shared/human-time")
+Modal     = require("../../shared/modal")
 
-Internuncio    = require("internuncio")
-logger         = new Internuncio("Story Listing")
+Internuncio = require("internuncio")
+logger      = new Internuncio("Story Listing")
 
 StoryList = React.createClass
   displayName: "stories-listing"
 
   render: ->
-    R.table {className: "table stories"},
-      R.thead null,
-        R.th {className: "id"}, "ID"
-        R.th {className: "title"}, "Title"
-        R.th {className: "description"}, "Description"
-        R.th {className: "created-at"}, "Created At"
-        R.th {className: "delete-story"}, "Delete"
-      R.tbody null,
+    table {className: "table stories"},
+      thead null,
+        th {className: "id"}, "ID"
+        th {className: "title"}, "Title"
+        th {className: "description"}, "Description"
+        th {className: "created-at"}, "Created At"
+        th {className: "delete-story"}, "Delete"
+      tbody null,
         for id, story of @props.stories
           @rowRender(id, story)
 
   rowRender: (id, story) ->
-    R.tr {"data-id": id, key: id},
-      R.td {className: "id"}, id
-      R.td {className: "title"},
+    tr {"data-id": id, key: id},
+      td {className: "id"}, id
+      td {className: "title"},
         Link {to: "story", params: {id: id}}, story.title or "untitled"
         Link {to: "story-edit", params: {id: id}}, "(edit)"
-      R.td {className: "description"}, story.description
-      R.td {className: "created-at"},
+      td {className: "description"}, story.description
+      td {className: "created-at"},
         HumanTime(datetime: story.createdAt)
-      R.td {className: "link delete-story", onClick: @confirmDeleteRender.bind(this, id, story)}, "Delete"
+      td {className: "link delete-story", onClick: @confirmDeleteRender.bind(this, id, story)}, "Delete"
 
   confirmDeleteRender: (id, story) ->
     confirmationModal = Modal
@@ -44,19 +44,19 @@ StoryList = React.createClass
       type: "warning"
 
       body: [
-        R.p {key: "text"}, "Are you sure you want to delete"
-        R.p {key: "title"}, '"' + story.title + '"?'
+        p {key: "text"}, "Are you sure you want to delete"
+        p {key: "title"}, '"' + story.title + '"?'
       ]
 
       actions: [
-        R.span {
+        span {
           className: "btn dark btn-danger"
           key: "delete"
           onClick: @delete.bind(this, id)
           "data-dismiss": "modal"
         }, "Yes"
 
-        R.span {
+        span {
           className: "btn dark btn-primary"
           key: "cancel"
           "data-dismiss": "modal"

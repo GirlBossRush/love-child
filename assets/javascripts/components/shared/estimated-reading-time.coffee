@@ -4,7 +4,8 @@
 # * textComponent: React Component. Subtract's scrolled percentage of text if given.
 
 React  = require("react")
-R      = React.DOM
+{span} = React.DOM
+
 moment = require("moment")
 _      = require("underscore")
 
@@ -25,7 +26,7 @@ module.exports = React.createClass
       now = moment()
       now.add("m", minutes).fromNow(true)
 
-    R.span {className: "estimated-reading-time"}, label
+    span {className: "estimated-reading-time"}, label
 
   estimateTimeByText: (text = "") ->
     words     =  text

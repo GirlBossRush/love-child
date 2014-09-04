@@ -1,11 +1,11 @@
-React          = require("react")
-R              = React.DOM
+React = require("react")
+{aside, section} = React.DOM
 
 module.exports = React.createClass
   displayName: "view-controls"
 
   render: ->
-    R.aside {className: "view-controls"},
-      R.section {className: "primary-controls"},
+    aside {className: "view-controls"},
+      section {className: "primary-controls"},
         @props.primaryControls.map (component) ->
           component()

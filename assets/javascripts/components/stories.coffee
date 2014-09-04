@@ -1,8 +1,8 @@
-React           = require("react")
-R               = React.DOM
+React = require("react")
+{div} = React.DOM
 
 Stories = React.createClass
   render: ->
-    R.div {className: "stories-root"}, @props.activeRouteHandler()
+    div {className: "stories-root"}, @props.activeRouteHandler()
 
 module.exports = Stories

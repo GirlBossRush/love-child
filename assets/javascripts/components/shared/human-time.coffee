@@ -5,7 +5,8 @@
 REFRESH_DELAY = 1000
 
 React  = require("react")
-R      = React.DOM
+{time} = React.DOM
+
 moment = require("moment")
 
 HumanTime = React.createClass
@@ -31,7 +32,7 @@ HumanTime = React.createClass
     # Component may be rendered before data is ready.
     ISOFormatted = new Date(@props.datetime).toISOString() if @props.datetime
 
-    R.time {className: "human-time", dateTime: @props.datetime, title: ISOFormatted},
+    time {className: "human-time", dateTime: @props.datetime, title: ISOFormatted},
       @state.relativeTime
 
 module.exports = HumanTime
