@@ -31,5 +31,7 @@ module.exports = React.createClass
     story: null
 
   setTitle: ->
-    text = @state.story.title?.replace("&nbsp;", "") or "untitled"
-    document.title = title(text)
+    document.title = if @state.story
+      title(@state.story.title?.replace("&nbsp;", "") or "untitled")
+    else
+      title()

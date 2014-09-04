@@ -34,4 +34,9 @@ module.exports = React.createClass
     stories: null
 
   setTitle: ->
-    document.title = title("(#{size(@state.stories)}) Stories")
+    storyCount = if @state.stories
+      size(@state.stories)
+    else
+      0
+
+    document.title = title("(#{storyCount}) Stories")

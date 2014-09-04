@@ -29,6 +29,11 @@ module.exports = React.createClass
   getInitialState: ->
     story: null
 
+
   setTitle: ->
-    text = @state.story.title?.replace("&nbsp;", "") or "untitled"
-    document.title = title("Editing #{text}")
+    document.title = if @state.story
+      text = @state.story.title?.replace("&nbsp;", "") or "untitled"
+      title("Editing #{text}")
+    else
+      title()
+
