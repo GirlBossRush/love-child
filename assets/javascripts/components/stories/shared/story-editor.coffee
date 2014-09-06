@@ -3,7 +3,6 @@ React = require("react")
 
 {extend, debounce}   = require("underscore")
 MediumEditor         = require("medium-editor")
-htmlToText           = require("html-to-text")
 markdown             = require("../../../helpers/markdown")
 html2markdown        = require("html2markdown")
 Internuncio          = require("internuncio")
@@ -41,7 +40,7 @@ StoryEditor = React.createClass
         primaryControls: [
           savedState(isSaving: @state.isSaving, isSaved: @state.isSaved)
 
-          estimatedReadingTime.bind(textComponent: @refs.body, text: htmlToText.fromString(@state.story.body) )
+          estimatedReadingTime(textComponent: @refs.body)
         ]
 
       header {className: "headline"},

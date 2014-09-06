@@ -6,7 +6,6 @@ estimatedReadingTime = require("../../shared/estimated-reading-time")
 userPreferences      = require("../../users/preferences")
 viewControls         = require("./view-controls")
 fullscreenToggle     = require("./view-controls/fullscreen-toggle")
-htmlToText           = require("html-to-text")
 markdown             = require("../../../helpers/markdown")
 
 module.exports = React.createClass
@@ -16,7 +15,7 @@ module.exports = React.createClass
     section {className: "story"},
       viewControls
         primaryControls: [
-          estimatedReadingTime(textComponent: @refs.body, text: htmlToText.fromString(@props.story.body))
+          estimatedReadingTime(textComponent: @refs.body, trackScrollPosition: true)
           fullscreenToggle()
         ]
 

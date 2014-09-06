@@ -16,7 +16,9 @@ module.exports = React.createClass
   displayName: "estimated-reading-time"
 
   render: ->
-    {minutes, wordCount} = @estimateTimeByText(@props.text)
+    return span(className: "parent-component-not-ready") unless @props.textComponent?
+
+    {minutes, wordCount} = @estimateTimeByText(@props.textComponent.getDOMNode().innerHTML)
 
     label = if wordCount < WORDS_PER_MINUTE
       "A few seconds" # Very short text.
@@ -46,13 +48,18 @@ module.exports = React.createClass
     # Percentage will be higher than 1 if the window is scrolled beyond the element.
     return Math.min(scrollPercent, 1)
 
+  getDefaultProps: ->
+    trackScrollPosition: false
+
   componentDidMount: ->
-    throttledUpdate = debounce(@forceUpdate.bind(this), SCROLL_THROTTLE)
+    return unless @props.trackScrollPosition
 
     # Calculating scroll position without jQuery is incredibly frustrating.
     # Each browser handles window scrolling dimensions differently.
     # The throttled function must be in a callback because React isn't detecting
     # that an update should be made.
+
+    throttledUpdate = debounce(@forceUpdate.bind(this), SCROLL_THROTTLE)
     $(window).scroll ->
       throttledUpdate()
 
