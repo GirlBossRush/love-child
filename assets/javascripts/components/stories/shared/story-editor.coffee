@@ -4,6 +4,8 @@ React = require("react")
 {extend, debounce}   = require("underscore")
 MediumEditor         = require("medium-editor")
 htmlToText           = require("html-to-text")
+markdown             = require("../../../helpers/markdown")
+html2markdown        = require("html2markdown")
 Internuncio          = require("internuncio")
 
 userPreferences      = require("../../users/preferences")
@@ -37,16 +39,18 @@ StoryEditor = React.createClass
         div
           ref: "title"
           className: "title"
-          onInput: @handleContentChange
-          contentEditable: true
           "data-placeholder": "Title"
+          "data-parser": "plaintext"
+          contentEditable: true
+          onInput: @handleContentChange
 
         div
           ref: "description"
           className: "description",
           "data-placeholder": "Description"
-          onInput: @handleContentChange,
+          "data-parser": "markdown"
           contentEditable: true
+          onInput: @handleContentChange,
 
         div {className: "author"}, @state.story.author
         humanTime {datetime: @state.story.updatedAt}
@@ -58,6 +62,7 @@ StoryEditor = React.createClass
         "data-width": @state.paragraphWidth
         "data-font-size": @state.paragraphFontSize
         "data-placeholder": "Your story begins..."
+        "data-parser": "markdown"
         contentEditable: true
         onInput: @handleContentChange
 
@@ -67,8 +72,12 @@ StoryEditor = React.createClass
     @state.isSaving = true
     @forceUpdate()
 
+    {title, description, body} = @state.story
+    updatedAt                  = Firebase.ServerValue.TIMESTAMP
+
     @state.storyRef.transaction =>
-      extend {}, @state.story, {updatedAt: Firebase.ServerValue.TIMESTAMP}
+      return {title, description, body, updatedAt}
+
     , (error, committed, snapshot) =>
       if error
         logger.error(error)
@@ -92,7 +101,6 @@ StoryEditor = React.createClass
       @forceUpdate()
 
       @updateContentEditableFields()
-
       @saveStory()
 
   componentDidMount: ->
@@ -112,14 +120,24 @@ StoryEditor = React.createClass
     # Contenteditable fields must be assigned outside of React's update cycle.
     # Otherwise the cursor position will be lost on each update.
     for field in contentEditableFields
-      @refs[field].getDOMNode().innerHTML = @state.story[field]
+      fieldDOMNode = @refs[field].getDOMNode()
+
+      fieldDOMNode.innerHTML = if fieldDOMNode.dataset["parser"] is "markdown"
+        markdown(@state.story[field])
+      else
+        @state.story[field]
 
     @forceUpdate()
 
   updateContentEditableFields: ->
     # Fetch data from DOM, update model attributes.
     for field in contentEditableFields
-      @state.story[field] = @refs[field].getDOMNode().innerHTML
+      fieldDOMNode = @refs[field].getDOMNode()
+
+      @state.story[field] = if fieldDOMNode.dataset["parser"] is "markdown"
+        html2markdown(fieldDOMNode.innerHTML)
+      else
+        fieldDOMNode.textContent
 
   getInitialState: ->
     paragraphFontSize: userPreferences.stories.fontSize

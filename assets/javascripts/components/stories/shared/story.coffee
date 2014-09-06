@@ -7,6 +7,7 @@ userPreferences      = require("../../users/preferences")
 viewControls         = require("./view-controls")
 fullscreenToggle     = require("./view-controls/fullscreen-toggle")
 htmlToText           = require("html-to-text")
+markdown             = require("../../../helpers/markdown")
 
 module.exports = React.createClass
   displayName: "story"
@@ -21,8 +22,14 @@ module.exports = React.createClass
 
       header {className: "headline"},
         div {className: "title", ref: "title", "data-placeholder": "untitled"}, @props.story.title
-        div {className: "description"}, @props.story.description
+
+        div
+          className: "description"
+          dangerouslySetInnerHTML:
+            __html: markdown(@props.story.description)
+
         div {className: "author"}, @props.story.author
+
         humanTime {datetime: @props.story.updatedAt}
         hr {className: "section-seperator"}
 
@@ -32,7 +39,7 @@ module.exports = React.createClass
         "data-width": @state.paragraphWidth
         "data-font-size": @state.paragraphFontSize
         dangerouslySetInnerHTML:
-          __html: @props.story.body
+          __html: markdown(@props.story.body)
 
       footer {className: "summary"}
 
