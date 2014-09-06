@@ -1,0 +1,22 @@
+.medium-editor-toolbar
+  background-color: $black
+
+  border: 1px solid $gray-light
+
+  li button
+    border-right-color: $gray-light
+
+    color: $white
+
+    transition: none
+
+    &:hover
+      background-color: $black
+      color: darken($brand-primary, 3%)
+
+  .medium-editor-action.medium-editor-button-active
+    background-color: $black
+    color: $brand-primary
+
+.medium-toolbar-arrow-under:after
+  border-color: $black transparent transparent transparent
