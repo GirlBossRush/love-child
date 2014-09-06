@@ -18,6 +18,18 @@ savedState           = require("./view-controls/saved-state")
 fullscreenToggle     = require("./view-controls/fullscreen-toggle")
 
 logger = new Internuncio("Story Listing")
+
+MEDIUM_OPTIONS =
+  cleanPastedHTML: true
+  disableDoubleReturn: true
+  firstHeader: "h1"
+  secondHeader: "h2"
+  buttons: ["bold", "italic", "underline", "quote", "header1", "header2"]
+  buttonLabels:
+    bold: "<span class='glyphicon glyphicon-bold'></span>"
+    italic: "<span class='glyphicon glyphicon-italic'></span>"
+    bold: "<span class='glyphicon glyphicon-bold'></span>"
+
 UPDATE_THROTTLE = 1500
 contentEditableFields = ["title", "description", "body"]
 
@@ -112,7 +124,7 @@ StoryEditor = React.createClass
     body = @refs.body.getDOMNode()
 
     # Setup editor controls.
-    new MediumEditor(body)
+    new MediumEditor body, MEDIUM_OPTIONS
 
     body.focus()
 
