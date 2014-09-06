@@ -1,0 +1,107 @@
+.story .body
+  & > *
+    font-family: $font-family-serif
+
+    margin-right: auto
+    margin-left: auto
+
+    transition-property: font-size width
+    transition-duration: 100ms
+    transition-timing-function: ease-out
+
+  p
+    & + p
+      margin-top: 1.4em
+
+    & + h1, & + h2
+      margin-top: 2em
+
+  h1
+    font-weight: bold
+
+  &[data-width="normal"]
+    & > *
+      max-width: 700px
+
+    &[data-font-size="smaller"]
+      h1
+        font-size: 30px
+        line-height: 1.4
+
+      h2
+        font-size: 26px
+        line-height: 1.423
+
+      p, blockquote
+        font-size: 18
+        line-height: 1.55
+
+    &[data-font-size="normal"]
+      h1
+        font-size: 36px
+        line-height: 1.361
+
+      h2
+        font-size: 32px
+        line-height: 1.375
+
+      p, blockquote
+        font-size: 22px
+        line-height: 1.5
+
+    &[data-font-size="larger"]
+      h1
+        font-size: 42px
+        line-height: 1.357
+
+      h2
+        font-size: 38px
+        line-height: 1.368
+
+      p, blockquote
+        font-size: 26px
+        line-height: 1.423
+
+  &[data-width="wider"]
+    & > *
+      max-width: 900px
+
+    &[data-font-size="smaller"]
+      h1
+        font-size: 30px
+        line-height: 1.433
+
+      h2
+        font-size: 26px
+        line-height: 1.462
+
+      p, blockquote
+        font-size: 18
+        line-height: 1.611
+
+    &[data-font-size="default"]
+      h1
+        font-size: 36px
+        line-height: 1.388
+
+      h2
+        font-size: 30px
+        line-height: 1.434
+
+      p, blockquote
+        font-size: 22px
+        line-height: 1.545
+
+    &[data-font-size="larger"]
+      h1
+        font-size: 42px
+        line-height: 1.381
+
+      h2
+        font-size: 38px
+        line-height: 1.394
+
+      p, blockquote
+        font-size: 26px
+        line-height: 1.461
+
