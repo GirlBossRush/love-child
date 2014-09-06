@@ -15,7 +15,6 @@ validations          = require("./validations")
 
 viewControls         = require("./view-controls")
 savedState           = require("./view-controls/saved-state")
-fullscreenToggle     = require("./view-controls/fullscreen-toggle")
 
 logger = new Internuncio("Story Listing")
 
@@ -43,8 +42,6 @@ StoryEditor = React.createClass
           savedState(isSaving: @state.isSaving, isSaved: @state.isSaved)
 
           estimatedReadingTime.bind(textComponent: @refs.body, text: htmlToText.fromString(@state.story.body) )
-
-          fullscreenToggle()
         ]
 
       header {className: "headline"},
