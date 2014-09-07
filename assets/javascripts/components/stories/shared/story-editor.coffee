@@ -7,12 +7,14 @@ markdown             = require("../../../helpers/markdown")
 html2markdown        = require("html2markdown")
 Internuncio          = require("internuncio")
 
-userPreferences      = require("../../users/preferences")
+userPreferences      = require("../../../helpers/user-preferences")
 humanTime            = require("../../shared/human-time")
 estimatedReadingTime = require("../../shared/estimated-reading-time")
 validations          = require("./validations")
 
 viewControls         = require("./view-controls")
+readingPreferences   = require("./view-controls/reading-preferences")
+
 savedState           = require("./view-controls/saved-state")
 
 logger = new Internuncio("Story Listing")
@@ -35,12 +37,18 @@ StoryEditor = React.createClass
   displayName: "story-editor"
 
   render: ->
+    {fontSize, paragraphWidth} = userPreferences.stories
+
     section {className: "story edit"},
       viewControls
         primaryControls: [
           savedState(isSaving: @state.isSaving, isSaved: @state.isSaved)
 
           estimatedReadingTime(textComponent: @refs.body)
+        ]
+
+        secondaryControls: [
+          readingPreferences(storyComponent: this)
         ]
 
       header {className: "headline"},
@@ -67,8 +75,8 @@ StoryEditor = React.createClass
       article
         ref: "body"
         className: "body"
-        "data-width": @state.paragraphWidth
-        "data-font-size": @state.paragraphFontSize
+        "data-width": paragraphWidth
+        "data-font-size": fontSize
         "data-placeholder": "Your story begins..."
         "data-parser": "markdown"
         contentEditable: true
@@ -148,9 +156,6 @@ StoryEditor = React.createClass
         fieldDOMNode.textContent
 
   getInitialState: ->
-    paragraphFontSize: userPreferences.stories.fontSize
-    paragraphWidth: userPreferences.stories.paragraphWidth
-
     isSaving: false
     isSaved: true
 

@@ -3,20 +3,27 @@ React = require("react")
 
 humanTime            = require("../../shared/human-time")
 estimatedReadingTime = require("../../shared/estimated-reading-time")
-userPreferences      = require("../../users/preferences")
 viewControls         = require("./view-controls")
 fullscreenToggle     = require("./view-controls/fullscreen-toggle")
+readingPreferences   = require("./view-controls/reading-preferences")
+userPreferences      = require("../../../helpers/user-preferences")
 markdown             = require("../../../helpers/markdown")
 
 module.exports = React.createClass
   displayName: "story"
 
   render: ->
+    {fontSize, paragraphWidth} = userPreferences.stories
+
     section {className: "story"},
       viewControls
         primaryControls: [
           estimatedReadingTime(textComponent: @refs.body, trackScrollPosition: true)
           fullscreenToggle()
+        ]
+
+        secondaryControls: [
+          readingPreferences(storyComponent: this)
         ]
 
       header {className: "headline"},
@@ -35,8 +42,8 @@ module.exports = React.createClass
       article
         ref: "body"
         className: "body"
-        "data-width": @state.paragraphWidth
-        "data-font-size": @state.paragraphFontSize
+        "data-width": paragraphWidth
+        "data-font-size": fontSize
         dangerouslySetInnerHTML:
           __html: markdown(@props.story.body)
 
@@ -45,7 +52,3 @@ module.exports = React.createClass
   componentDidMount: ->
     # Update body reference for estimated reading time.
     @forceUpdate()
-
-  getInitialState: ->
-    paragraphFontSize: userPreferences.stories.fontSize
-    paragraphWidth: userPreferences.stories.paragraphWidth
