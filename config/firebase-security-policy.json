@@ -1,0 +1,42 @@
+{
+  "rules": {
+    "stories": {
+      ".read": true,
+
+      "$id": {
+        ".read": true,
+        ".write": true,
+
+        ".validate": "newData.hasChildren(['updatedAt'])",
+
+        "body": {
+          ".validate": "newData.isString()"
+        },
+
+        "title": {
+          ".validate": "newData.isString() &&
+                        newData.val().length <= 100"
+        },
+
+        "description": {
+          ".validate": "newData.isString() &&
+                        newData.val().length <= 2000"
+        },
+
+        "updatedAt": {
+          ".validate": "newData.isNumber() &&
+                        newData.val() <= now"
+        },
+
+        "createdAt": {
+          ".validate": "newData.isNumber() &&
+                        newData.val() <= now"
+        },
+
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
+  }
+}
