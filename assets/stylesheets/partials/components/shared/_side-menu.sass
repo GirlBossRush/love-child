@@ -22,10 +22,12 @@ $width-delta: $expanded-width - $collapsed-width
       text-align: right
 
       .list-group-item
-        transition: -moz-transform $speed-fast ease-out
-        transition: -webkit-transform $speed-fast ease-out
-        transition: -ms-transform $speed-fast ease-out
-        transition: transform $speed-fast ease-out
+        transition-duration: $speed-fast
+        transition-timing-function: ease-out
+        transition-property: -moz-transform
+        transition-property: -webkit-transform
+        transition-property: -ms-transform
+        transition-property: transform
 
         background: $black
 
@@ -48,16 +50,13 @@ $width-delta: $expanded-width - $collapsed-width
         &:hover
           color: $white
           +transform(translate($width-delta, 0))
+          +transform(translate3d($width-delta, 0, 0))
 
       .item-label
         font-size: 1.1em
 
       .accent
         margin-left: 15px
-
-html.csstransforms3d #aside-content
-  .menu-content .list-group-item:hover
-    +transform(translate3d($width-delta, 0, 0))
 
 // ---- Fullscreen mode ----
 
