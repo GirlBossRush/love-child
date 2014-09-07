@@ -1,6 +1,6 @@
 # Table of stories.
 # Arguments:
-# * Stories: Backbone Collection.
+# * Stories: Array.
 
 React = require("react")
 {table, thead, th, tbody, tr, td, span, p} = React.DOM
