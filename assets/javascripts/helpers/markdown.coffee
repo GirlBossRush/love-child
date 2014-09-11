@@ -1,5 +1,5 @@
 marked   = require("marked")
-{extend} = require("underscore")
+{extend} = require("lodash")
 renderer = new marked.Renderer()
 paragraphCounter = 0
 

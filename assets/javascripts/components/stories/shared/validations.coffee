@@ -1,5 +1,5 @@
 key        = require("../../../lib/key-map")
-{contains} = require("underscore")
+{contains} = require("lodash")
 
 module.exports =
   title:

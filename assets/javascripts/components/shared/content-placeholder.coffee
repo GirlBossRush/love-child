@@ -4,7 +4,7 @@ React = require("react")
 {div, p, img, section, hr} = React.DOM
 
 {asset}  = require("../../helpers/path")
-{sample} = require("underscore")
+{sample} = require("lodash")
 quotes   = require("../../lib/quotes")
 
 ContentPlaceholder = React.createClass

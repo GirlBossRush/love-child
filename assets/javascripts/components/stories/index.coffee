@@ -5,7 +5,7 @@ ReactFireMixin     = require("reactfire")
 
 title              = require("../../helpers/title")
 {api}              = require("../../helpers/path")
-{size}             = require("underscore")
+{size}             = require("lodash")
 
 View               = require("./shared/stories-listing")
 ContentPlaceholder = require("../shared/content-placeholder")

@@ -1,4 +1,4 @@
-_    = require("underscore")
+{extend} = require("lodash")
 
 environment = if window?
   # Running within browser.
@@ -18,6 +18,6 @@ environmentConfig = switch environment
   else
     throw "Unknown environment: #{environment}"
 
-_.extend(config, environmentConfig)
+extend(config, environmentConfig)
 
 module.exports = config

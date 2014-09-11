@@ -1,7 +1,7 @@
 React = require("react")
 {section, div, article, header, footer, hr} = React.DOM
 
-{extend, debounce}   = require("underscore")
+{extend, debounce}   = require("lodash")
 MediumEditor         = require("medium-editor")
 markdown             = require("../../../helpers/markdown")
 html2markdown        = require("html2markdown")

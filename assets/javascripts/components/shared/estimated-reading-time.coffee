@@ -7,7 +7,7 @@ React  = require("react")
 {span} = React.DOM
 
 moment           = require("moment")
-{size, debounce} = require("underscore")
+{size, debounce} = require("lodash")
 
 WORDS_PER_MINUTE = 250
 SCROLL_THROTTLE  = 500

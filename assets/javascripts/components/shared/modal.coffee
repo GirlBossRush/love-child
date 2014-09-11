@@ -8,7 +8,7 @@
 
 React = require("react")
 {header, footer, div, article, h5} = React.DOM
-{uniqueId} = require("underscore")
+{uniqueId} = require("lodash")
 
 Modal = React.createClass
   displayName: "modal"
