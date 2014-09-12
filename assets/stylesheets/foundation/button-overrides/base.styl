@@ -1,0 +1,33 @@
+$types = {
+  default: $brand-primary,
+  primary: $brand-primary,
+  danger: $brand-danger,
+  info: $brand-info,
+  warning: $brand-warning,
+  success: $brand-success
+}
+
+.btn
+  border: none
+  border-radius: 0
+  border-bottom: 1px solid $white
+  padding: 4px 16px
+  pachoo: foo
+
+for $type, $color in $types
+  .btn.btn-{$type}
+    color: $black
+    background: $body-bg
+    border-bottom-color: $color
+
+    &:hover
+      color: $color
+      border-bottom-color: $color
+
+for $type, $color in $types
+  .btn.dark.btn-{$type}
+    color: $white
+    background: $black
+
+    &:hover
+      color: $color

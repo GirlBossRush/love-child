@@ -1,0 +1,69 @@
+$expanded-width = 150px
+$collapsed-width = 45px
+$width-delta = $expanded-width - $collapsed-width
+
+#aside-content
+  display: block
+
+  position: fixed
+  top: 25%
+  left: - $width-delta
+  z-index: $priority-high
+
+  width: $expanded-width
+  height: 100%
+
+  color: $white
+
+  user-select(none)
+
+  .menu-content
+    .list-group
+      text-align: right
+
+      .list-group-item
+        transition-duration: $speed-fast
+        transition-timing-function: ease-out
+        transition-property: -moz-transform
+        transition-property: -webkit-transform
+        transition-property: -ms-transform
+        transition-property: transform
+
+        background: $black
+
+        cursor: pointer
+        color: $gray-light
+
+        border-color: $gray-light
+
+        border-left: none
+        border-right: none
+
+        &:first-child
+          border-radius: 2px
+          border-top: none
+
+        &:last-child
+          border-radius: 0
+          border-bottom: 2px
+
+        &:hover
+          color: $white
+          transform(translate($width-delta, 0))
+          transform(translate3d($width-delta, 0, 0))
+
+      .item-label
+        font-size: 1.1em
+
+      .accent
+        margin-left: 15px
+
+// ---- Fullscreen mode ----
+
+html.fullscreen
+  #aside-content
+    opacity: 0.15
+    transition: opacity 100ms linear
+
+    &:hover
+      opacity: 1

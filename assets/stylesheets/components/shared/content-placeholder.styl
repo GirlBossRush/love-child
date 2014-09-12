@@ -1,0 +1,65 @@
+.content-placeholder
+  display: block
+
+  margin: 30px auto
+
+  max-width: 700px
+
+  text-align: center
+
+  .alternative-fiction-text-logo
+    height: 80px
+    width: 548px
+
+  .content-seperator
+    width: 85%
+    height: 1px
+
+    margin-top: 12px
+    background-color: $black
+    position: relative
+
+    &:before
+      content: "\2767" // Binding Signature Leaf
+
+      font-size: 1.5em
+
+      background: $body-bg
+
+      position: absolute
+      top: -18px
+      left: 47%
+      z-index: 1
+
+      width: 35px
+
+    &:after
+      content: ''
+      position: absolute
+      display: block
+      height: 100%
+      background-color: $brand-primary
+      left: 0%
+      right: 100%
+
+      animation(loading 2s ease infinite)
+
+  .quote
+    font-size: 1.5em
+
+  .quote-author
+    text-align: right
+
+keyframes(loading)
+  0%
+    left: 0
+    right: 100%
+
+  50%
+    left: 0
+    right: 0
+
+  100%
+    left: 100%
+    right: 0
+
