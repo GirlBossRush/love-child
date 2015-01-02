@@ -28,6 +28,6 @@ userPreferences =
 
 Object.defineProperties userPreferences.stories,
   fontSize: new Storage("stories fontSize", "normal")
-  paragraphWidth: new Storage("stories, paragraphWidth", "normal")
+  paragraphWidth: new Storage("stories paragraphWidth", "normal")
 
 module.exports = userPreferences
