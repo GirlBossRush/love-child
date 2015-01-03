@@ -26,11 +26,11 @@ module.exports = React.createClass
           readingPreferences(storyComponent: this)
         ]
 
-      header {className: "headline"},
+      header {className: "selectable headline"},
         div {className: "title", ref: "title", "data-placeholder": "untitled"}, @props.story.title
 
         div
-          className: "description"
+          className: "selectable description"
           dangerouslySetInnerHTML:
             __html: markdown(@props.story.description)
 
@@ -41,7 +41,7 @@ module.exports = React.createClass
 
       article
         ref: "body"
-        className: "body"
+        className: "selectable body"
         "data-width": paragraphWidth
         "data-font-size": fontSize
         dangerouslySetInnerHTML:
