@@ -77,7 +77,6 @@ StoryEditor = React.createClass
         className: "body"
         "data-width": paragraphWidth
         "data-font-size": fontSize
-        "data-placeholder": "Your story begins..."
         "data-parser": "markdown"
         contentEditable: true
         onInput: @handleContentChange
@@ -142,6 +141,10 @@ StoryEditor = React.createClass
         markdown(@state.story[field])
       else
         @state.story[field]
+
+      # Fix issue where blank stories don't have first paragraph.
+      if field is "body" and fieldDOMNode.innerHTML is ""
+        fieldDOMNode.innerHTML = "<p class='paragraph-placeholder'>&nbsp;</p>"
 
     @forceUpdate()
 
