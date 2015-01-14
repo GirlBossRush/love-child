@@ -29,21 +29,21 @@
     "watchify": "~1.0.2"
   },
   "dependencies": {
-    "jquery": "~2.1.1",
-    "lodash": "~2.4.1",
-    "moment": "~2.7.0",
-    "react": "~0.12.2",
-    "react-router": "~0.11.6",
-    "medium-editor": "~1.8.14",
     "bootstrap": "~3.2.0",
-    "internuncio": "0.0.3",
-    "reactfire": "~0.1.6",
+    "bootstrap-styl": "^4.0.1",
     "firebase": "~1.0.21",
     "html2markdown": "~1.1.0",
+    "internuncio": "0.0.3",
+    "jquery": "~2.1.1",
+    "lodash": "~2.4.1",
     "marked": "~0.3.2",
+    "medium-editor": "~1.8.14",
+    "moment": "~2.7.0",
+    "nib": "~1.0.3",
+    "react": "~0.12.2",
     "react-bootstrap": "~0.11.1",
-    "bootstrap-stylus": "Acquisio/bootstrap-stylus#782627f",
-    "nib": "~1.0.3"
+    "react-router": "~0.11.6",
+    "reactfire": "~0.1.6"
   },
   "private": true,
   "engines": {
