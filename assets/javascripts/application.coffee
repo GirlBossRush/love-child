@@ -16,16 +16,19 @@ stories =
   edit:  require("./components/stories/edit")
   new:   require("./components/stories/new")
 
-routes = Routes {location: "history"},
-  Route {name: "root", path: "/", handler: Application},
-    DefaultRoute {handler: ErrorPage, code: 204, message: "Alternative Fiction"}
+routes = (<Route name="root" path="/" handler={Application}>
+<DefaultRoute handler={ErrorPage.bind(this, code: 204, message: "Alternative Fiction")} />
 
-    Route {name: "stories", handler: Stories},
-      DefaultRoute {handler: stories.index}
-      Route {name: "stories-new", path: "new", handler: stories.new}
-      Route {name: "story", path: ":id", handler: stories.show}
-      Route {name: "story-edit", path: ":id/edit", handler: stories.edit}
+  <Route name="stories" handler={Stories}>
+    <DefaultRoute handler={stories.index} />
+    <Route name="stories-new" path="new" handler={stories.new} />
+    <Route name="story" path=":id" handler={stories.show} />
+    <Route name="story-edit" path=":id/edit" handler={stories.edit} />
+  </Route>
 
-  NotFoundRoute {name: "not-found", handler: ErrorPage, code: 404}
+  <NotFoundRoute name="not-found" handler={ErrorPage.bind(this, code: 404)} />
+</Route>)
+
 $ ->
-  React.renderComponent(routes, document.body)
+  Router.run routes, Router.HistoryLocation, (Handler) ->
+    React.render(<Handler />, document.body)

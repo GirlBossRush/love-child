@@ -5,30 +5,30 @@ ReactFireMixin     = require("reactfire")
 
 title              = require("../../helpers/title")
 {api}              = require("../../helpers/path")
+Router             = require("react-router")
 
 View               = require("./shared/story-editor")
 ContentPlaceholder = require("../shared/content-placeholder")
 
 module.exports = React.createClass
   displayName: "story-edit"
-  mixins: [ReactFireMixin]
+  mixins: [ReactFireMixin, Router.State]
 
   render: ->
     if @state.story
-      View(story: @state.story, storyRef: @storyRef)
+      <View story={@state.story} storyRef={@storyRef} />
     else
-      ContentPlaceholder()
+      <ContentPlaceholder />
 
   componentDidUpdate: ->
     @setTitle()
 
   componentWillMount: ->
-    @storyRef = new Firebase(api("stories/#{@props.params.id}"))
+    @storyRef = new Firebase(api("stories/#{@getParams().id}"))
     @bindAsObject(@storyRef, "story")
 
   getInitialState: ->
     story: null
-
 
   setTitle: ->
     document.title = if @state.story

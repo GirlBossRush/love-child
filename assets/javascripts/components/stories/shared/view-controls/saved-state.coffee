@@ -1,7 +1,6 @@
 # Story saved state indicator.
 
 React  = require("react")
-{span} = React.DOM
 
 module.exports = React.createClass
   displayName: "saved-state"
@@ -20,5 +19,7 @@ module.exports = React.createClass
       text: "?"
       className: "unknown"
 
-    span {className: "save-state #{attributes.className}"}, attributes.text
+    <span className="save-state #{attributes.className}">
+      {attributes.text}
+    </span>
 

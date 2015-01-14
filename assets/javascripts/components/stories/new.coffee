@@ -11,12 +11,12 @@ ContentPlaceholder = require("../shared/content-placeholder")
 module.exports = React.createClass
   displayName: "story-new"
 
-  mixins: [ReactFireMixin]
+  mixins: [ReactFireMixin, Router.Navigation]
 
   render: ->
     if @state.story
-      Router.transitionTo("story-edit", {id: @storyRef.name()})
-    ContentPlaceholder()
+      @transitionTo("story-edit", {id: @storyRef.name()})
+    <ContentPlaceholder />
 
   componentWillMount: ->
     @storiesRef = new Firebase(api("stories"))

@@ -5,8 +5,6 @@
 REFRESH_DELAY = 1000
 
 React  = require("react")
-{time} = React.DOM
-
 moment = require("moment")
 
 HumanTime = React.createClass
@@ -16,8 +14,9 @@ HumanTime = React.createClass
     momentInstance = moment(@props.datetime)
     ISOFormatted   = momentInstance.toISOString()
 
-    time {className: "human-time", dateTime: ISOFormatted, title: ISOFormatted},
-      momentInstance.fromNow()
+    <time className="human-time" dateTime={ISOFormatted} title={ISOFormatted}>
+      {momentInstance.fromNow()}
+    </time>
 
   componentDidMount: ->
     @interval = setInterval(@refresh, REFRESH_DELAY)

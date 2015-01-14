@@ -1,11 +1,11 @@
 React = require("react")
 {header, footer, section, article, div, hr} = React.DOM
 
-humanTime            = require("../../shared/human-time")
-estimatedReadingTime = require("../../shared/estimated-reading-time")
-viewControls         = require("./view-controls")
-fullscreenToggle     = require("./view-controls/fullscreen-toggle")
-readingPreferences   = require("./view-controls/reading-preferences")
+HumanTime            = require("../../shared/human-time")
+EstimatedReadingTime = require("../../shared/estimated-reading-time")
+ViewControls         = require("./view-controls")
+FullscreenToggle     = require("./view-controls/fullscreen-toggle")
+ReadingPreferences   = require("./view-controls/reading-preferences")
 userPreferences      = require("../../../helpers/user-preferences")
 markdown             = require("../../../helpers/markdown")
 
@@ -15,39 +15,49 @@ module.exports = React.createClass
   render: ->
     {fontSize, paragraphWidth} = userPreferences.stories
 
-    section {className: "story"},
-      viewControls
-        primaryControls: [
-          estimatedReadingTime(textComponent: @refs.body, trackScrollPosition: true)
-          fullscreenToggle()
-        ]
+    <section className="story">
+      <ViewControls
+        primaryControls={[
+          <EstimatedReadingTime textComponent={@refs.body} trackScrollPosition />
+          <FullscreenToggle />
+        ]}
 
-        secondaryControls: [
-          readingPreferences(storyComponent: this)
-        ]
+        secondaryControls={[
+          <ReadingPreferences storyComponent=this />
+        ]}
+      />
 
-      header {className: "selectable headline"},
-        div {className: "title", ref: "title", "data-placeholder": "untitled"}, @props.story.title
+      <header className="selectable headline">
+        <div className="title", ref= "title" data-placeholder="untitled">
+          {@props.story.title}
+        </div>
 
-        div
-          className: "selectable description"
-          dangerouslySetInnerHTML:
+        <div
+          className="selectable description"
+          dangerouslySetInnerHTML={{
             __html: markdown(@props.story.description)
+          }}
+        />
 
-        div {className: "author"}, @props.story.author
+        <div className="author">{@props.story.author}</div>
 
-        humanTime {datetime: @props.story.updatedAt}
-        hr {className: "section-seperator"}
+        <HumanTime datetime={@props.story.updatedAt} />
+        <hr className="section-seperator" />
+      </header>
 
-      article
-        ref: "body"
-        className: "selectable body"
-        "data-width": paragraphWidth
-        "data-font-size": fontSize
-        dangerouslySetInnerHTML:
+      <article
+        ref="body"
+        className="selectable body"
+        data-width={paragraphWidth}
+        data-font-size={fontSize}
+        dangerouslySetInnerHTML={{
           __html: markdown(@props.story.body)
+        }}
+      />
 
-      footer {className: "summary"}
+
+      <footer className="summary" />
+    </section>
 
   componentDidMount: ->
     # Update body reference for estimated reading time.

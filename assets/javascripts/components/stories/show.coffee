@@ -5,6 +5,7 @@ ReactFireMixin     = require("reactfire")
 
 title              = require("../../helpers/title")
 {api}              = require("../../helpers/path")
+Router             = require("react-router")
 
 View               = require("./shared/story")
 ContentPlaceholder = require("../shared/content-placeholder")
@@ -12,19 +13,19 @@ ContentPlaceholder = require("../shared/content-placeholder")
 module.exports = React.createClass
   displayName: "story-show"
 
-  mixins: [ReactFireMixin]
+  mixins: [ReactFireMixin, Router.State]
 
   render: ->
     if @state.story
-      View(story: @state.story)
+      <View story={@state.story} />
     else
-      ContentPlaceholder()
+      <ContentPlaceholder />
 
   componentDidUpdate: ->
     @setTitle()
 
   componentWillMount: ->
-    @storyRef = new Firebase(api("stories/#{@props.params.id}"))
+    @storyRef = new Firebase(api("stories/#{@getParams().id}"))
     @bindAsObject(@storyRef, "story")
 
   getInitialState: ->

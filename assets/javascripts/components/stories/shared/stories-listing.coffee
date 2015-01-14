@@ -3,7 +3,6 @@
 # * Stories: Array.
 
 React = require("react")
-{table, thead, th, tbody, tr, td, span, p} = React.DOM
 
 {Link}    = require("react-router")
 HumanTime = require("../../shared/human-time")
@@ -16,73 +15,65 @@ StoryList = React.createClass
   displayName: "stories-listing"
 
   render: ->
-    table {className: "table stories"},
-      thead null,
-        th {className: "id"}, "ID"
-        th {className: "title"}, "Title"
-        th {className: "description"}, "Description"
-        th {className: "updated-at"}, "Updated"
-        th {className: "created-at"}, "Created"
-        th {className: "delete-story"}, "Delete"
-      tbody null,
+    <table className="table stories">
+      <thead>
+        <th className="id">ID</th>
+        <th className="title">Title</th>
+        <th className="description">Description</th>
+        <th className="updated-at">Updated</th>
+        <th className="created-at">Created</th>
+        <th className="delete-story">Delete</th>
+      </thead>
+
+      <tbody>{
         for id, story of @props.stories
           @rowRender(id, story)
+      }</tbody>
+    </table>
 
   rowRender: (id, story) ->
-    tr {"data-id": id, key: id},
-      td {className: "id"}, id
+    <tr data-id=id key=id>
+      <td className="id">{id}</td>
 
-      td {className: "title"},
-        Link {to: "story", params: {id: id}}, story.title or "untitled"
-        Link {to: "story-edit", params: {id: id}}, "(edit)"
+      <td className="title">
+        <Link to="story" params={{id: id}}>{story.title or "untitled"}</Link>
+        <Link to="story-edit" params={{id: id}}>(edit)</Link>
+      </td>
 
-      td {className: "description"}, story.description
+      <td className="description">{story.description}</td>
 
-      td {className: "updated-at"},
-        HumanTime(datetime: story.updatedAt)
+      <td className="updated-at">
+        <HumanTime datetime={story.updatedAt} />
+      </td>
 
-      td {className: "created-at"},
-        HumanTime(datetime: story.createdAt)
+      <td className="created-at">
+        <HumanTime datetime={story.createdAt} />
+      </td>
 
-      td {className: "link delete-story", onClick: @confirmDeleteRender.bind(this, id, story)}, "Delete"
+      <td className="link delete-story" onClick={@confirmDeleteRender.bind(this, id, story)}>
+        Delete
+      </td>
+    </tr>
 
   confirmDeleteRender: (id, story) ->
-    confirmationModal = Modal
-      title: "Confirm Deletion"
-      type: "warning"
+    actions = <div>
+      <span className="btn dark btn-danger" onClick={@deleteStory.bind(this, id)}>Yes</span>
+      <span className="btn dark btn-primary" data-dismiss="modal">No</span>
+    </div>
 
-      body: [
-        p {key: "text"}, "Are you sure you want to delete"
-        p {key: "title"}, '"' + story.title + '"?'
-      ]
+    confirmationModal = <Modal title="Confirm Deletion" type="warning", actions={actions}>
+      <p key="text">{"Are you sure you want to delete"}</p>
+      <p key="title">{'"' + story.title + '"?'}</p>
+    </Modal>
 
-      actions: [
-        span {
-          className: "btn dark btn-danger"
-          key: "delete"
-          onClick: @delete.bind(this, id)
-          "data-dismiss": "modal"
-        }, "Yes"
+    React.render(confirmationModal, document.querySelector("#above-content"))
 
-        span {
-          className: "btn dark btn-primary"
-          key: "cancel"
-          "data-dismiss": "modal"
-        }, "No"
-      ]
-
-    React.renderComponent confirmationModal, document.querySelector("#above-content")
-
-  delete: (id) ->
-    # debugger
+  deleteStory: (id) ->
     storyRef = @props.storiesRef.child(id)
     storyRef.remove (error) =>
       if error
         logger.error(error)
       else
         @props.onChange()
-      # success: (model) =>
-      #   @props.stories.remove(model)
-      #   @forceUpdate()
 
 module.exports = StoryList

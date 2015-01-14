@@ -7,33 +7,39 @@
 # * Actions: React DOM (Most likely an array).
 
 React = require("react")
-{header, footer, div, article, h5} = React.DOM
 {uniqueId} = require("lodash")
 
 Modal = React.createClass
   displayName: "modal"
 
   render: ->
-    div {
-      className: "modal fade",
-      key: @state.id,
-      id: @state.id,
-      tabIndex: "-1",
-      role: "dialog",
-      "aria-labelledby": @props.type,
-      "aria-hidden": "true"
-    },
+    <div
+      className="modal fade"
+      key={@state.id}
+      id={@state.id}
+      tabIndex="-1"
+      role="dialog"
+      "aria-labelledby"={@props.type}
+      "aria-hidden"="true"
+    >
+      <div className="modal-dialog modal-sm">
+        <div className="modal-inner">
+          <div className="modal-content">
+            <header className="modal-header">
+              <h5 className="modal-title #{@state.type}" id={@props.type}>
+                {@state.title}
+              </h5>
+            </header>
 
-      div {className: "modal-dialog modal-sm"},
-        div {className: "modal-inner"},
-          div {className: "modal-content"},
-            header {className: "modal-header"},
-              h5 {className: "modal-title #{@state.type}", id: @props.type}, @state.title
+            <article className="modal-body">{@props.children}</article>
 
-            article {className: "modal-body"}, @props.body
-
-            footer {className: "modal-footer"},
-              div {className: "actions"}, @props.actions
+            <footer className="modal-footer">
+              <div className="actions">{@props.actions}</div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
 
   getInitialState: ->
     id: uniqueId("modal")

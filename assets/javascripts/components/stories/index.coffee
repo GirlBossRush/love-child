@@ -16,9 +16,9 @@ module.exports = React.createClass
 
   render: ->
     if @state.stories
-      View(storiesRef: @storiesRef, stories: @state.stories, onChange: @handleChange)
+      <View storiesRef={@storiesRef} stories={@state.stories} onChange={@handleChange} />
     else
-      ContentPlaceholder()
+      <ContentPlaceholder />
 
   handleChange: ->
     @forceUpdate()

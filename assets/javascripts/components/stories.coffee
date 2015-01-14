@@ -1,8 +1,10 @@
 React = require("react")
-{div} = React.DOM
+{RouteHandler} = require("react-router")
 
 Stories = React.createClass
   render: ->
-    div {className: "stories-root"}, @props.activeRouteHandler()
+    <div className="stories-root">
+      <RouteHandler />
+    </div>
 
 module.exports = Stories

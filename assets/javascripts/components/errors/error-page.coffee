@@ -1,16 +1,18 @@
 React = require("react")
-{div, h1, p} = React.DOM
-
 title = require("../../helpers/title")
+Router = require("react-router")
 
 ErrorPage = React.createClass
+  mixins: [Router.State]
   displayName: "errorPage"
 
   render: ->
-    message = @props.message or "'#{@props.params.splat}' is invalid."
-    div {className: "error-page", "data-code": @props.code},
-      h1 null, @props.code
-      p null, message
+    message = @props.message or "'#{@getParams().splat}' is invalid."
+
+    <div className="error-page" data-code=@props.code>
+      <h1>{@props.code}</h1>
+      <p>{message}</p>
+    </div>
 
   componentDidMount: ->
     document.title = title("#{@props.code} - Error")

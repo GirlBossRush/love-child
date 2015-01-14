@@ -1,7 +1,6 @@
 # Placeholder component. Used to fill in loading wait time.
 
 React = require("react")
-{div, p, img, section, hr} = React.DOM
 
 {asset}  = require("../../helpers/path")
 {sample} = require("lodash")
@@ -13,13 +12,15 @@ ContentPlaceholder = React.createClass
   render: ->
     {body, author} = @state.quote
 
-    section {className: "content-placeholder"},
-      img {className: "alternative-fiction-text-logo", src: asset("foundation/text-logo.svg")}
-      hr {className: "content-seperator"}
+    <section className="content-placeholder">
+      <img className="alternative-fiction-text-logo" src={asset("foundation/text-logo.svg")} />
+      <hr className="content-seperator" />
 
-      div {className: "quote"},
-        p {className: "quote-body"}, body
-        div {className: "quote-author"}, "― #{author}"
+      <div className="quote">
+        <p className="quote-body">{body}</p>
+        <div className="quote-author">{"― #{author}"}</div>
+      </div>
+    </section>
 
   getInitialState: ->
     quote: sample(quotes)

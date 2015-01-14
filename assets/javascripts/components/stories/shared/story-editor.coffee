@@ -1,5 +1,4 @@
 React = require("react")
-{section, div, article, header, footer, hr} = React.DOM
 
 {extend, debounce}   = require("lodash")
 MediumEditor         = require("medium-editor")
@@ -8,14 +7,14 @@ html2markdown        = require("html2markdown")
 Internuncio          = require("internuncio")
 
 userPreferences      = require("../../../helpers/user-preferences")
-humanTime            = require("../../shared/human-time")
-estimatedReadingTime = require("../../shared/estimated-reading-time")
+HumanTime            = require("../../shared/human-time")
+EstimatedReadingTime = require("../../shared/estimated-reading-time")
 validations          = require("./validations")
 
-viewControls         = require("./view-controls")
-readingPreferences   = require("./view-controls/reading-preferences")
+ViewControls         = require("./view-controls")
+ReadingPreferences   = require("./view-controls/reading-preferences")
 
-savedState           = require("./view-controls/saved-state")
+SavedState           = require("./view-controls/saved-state")
 
 logger = new Internuncio("Story Listing")
 
@@ -39,49 +38,57 @@ StoryEditor = React.createClass
   render: ->
     {fontSize, paragraphWidth} = userPreferences.stories
 
-    section {className: "story edit"},
-      viewControls
-        primaryControls: [
-          savedState(isSaving: @state.isSaving, isSaved: @state.isSaved)
+    <section className="story edit">
+      <ViewControls
+        primaryControls={[
+          <SavedState isSaving={@state.isSaving} isSaved={@state.isSaved} />
 
-          estimatedReadingTime(textComponent: @refs.body)
-        ]
+          <EstimatedReadingTime textComponent={@refs.body} />
+        ]}
 
-        secondaryControls: [
-          readingPreferences(storyComponent: this)
-        ]
+        secondaryControls={[
+          <ReadingPreferences storyComponent=this />
+        ]}
+      />
 
-      header {className: "headline"},
-        div
-          ref: "title"
-          className: "title"
-          "data-placeholder": "Title"
-          "data-parser": "plaintext"
-          contentEditable: true
-          onInput: @handleContentChange
+      <header className="headline">
+        <div
+          ref="title"
+          className="title"
+          data-placeholder="Title"
+          data-parser="plaintext"
+          contentEditable
+          onInput={@handleContentChange}
+        />
 
-        div
-          ref: "description"
-          className: "description",
-          "data-placeholder": "Description"
-          "data-parser": "markdown"
-          contentEditable: true
-          onInput: @handleContentChange,
+        <div
+          ref="description"
+          className="description"
+          data-placeholder="Description"
+          data-parser="markdown"
+          contentEditable
+          onInput={@handleContentChange}
+        />
 
-        div {className: "author"}, @state.story.author
-        humanTime {datetime: @state.story.updatedAt}
-        hr {className: "section-seperator"}
+        <div className="author">
+          {@state.story.author}
+        </div>
+        <HumanTime datetime={@state.story.updatedAt} />
+        <hr className="section-seperator" />
+      </header>
 
-      article
-        ref: "body"
-        className: "body"
-        "data-width": paragraphWidth
-        "data-font-size": fontSize
-        "data-parser": "markdown"
-        contentEditable: true
-        onInput: @handleContentChange
+      <article
+        ref="body"
+        className="body"
+        data-width={paragraphWidth}
+        data-font-size={fontSize}
+        data-parser="markdown"
+        contentEditable
+        onInput={@handleContentChange}
+      />
 
-      footer {className: "summary"}
+      <footer className="summary" />
+    </section>
 
   saveStory: debounce ->
     @state.isSaving = true
